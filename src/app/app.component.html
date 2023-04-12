@@ -1,1 +1,11 @@
-<div>Hello world!</div>
+<div class="main">
+    <mat-drawer-container class="example-container">
+      <mat-drawer mode="side" opened class="sidenav">
+        <app-sidebar></app-sidebar>
+      </mat-drawer>
+    <mat-drawer-content>
+      Main content
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>
