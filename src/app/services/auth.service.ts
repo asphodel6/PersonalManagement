@@ -1,26 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError, of } from 'rxjs';
+import { IUser } from '../interfaces/login.user.interface';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
-  public isLoggedIn(): boolean {
-    return this.getToken() !== null;
-  }
-  public login(userInfo: { email: string, password: string }): Observable<string | boolean> {
-    if (userInfo.email === 'admin@gmail.com' && userInfo.password === 'admin111') {
-      this.setToken('asdfghjkljvcuhcecwkbcanxmpozlkjhgf');
 
-      return of(true);
-    }
+  constructor(private _router: Router, private _fireAuth: AngularFireAuth) {
 
-    return throwError(() => new Error('Failed Login'));
   }
-  private setToken(token: string): void {
-    localStorage.setItem('token', token);
-  }
-  private getToken(): string | null {
-    return localStorage.getItem('token');
+
+  public login(user: IUser):void {
+    this._fireAuth.signInWithEmailAndPassword(user.email, user.password).then(() => {
+      localStorage.setItem('token', 'true');
+      this._router.navigate(['admin']);
+    })
+      .catch((error: any) => {
+        if (error.code) {
+          alert('Wrong email or password');
+        }
+      });
   }
 }
+
+
+
