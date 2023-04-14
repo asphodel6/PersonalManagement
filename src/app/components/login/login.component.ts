@@ -28,15 +28,14 @@ export class LoginComponent implements OnInit{
 
   public submitLogin(): void {
     this._authService.login(this.loginForm.value);
-    this.loginForm.value.email = '';
-    this.loginForm.value.password = '';
+    this.loginForm.get('password')?.reset();
   }
 
-  public get email (): any {
+  public get email(): any {
     return this.loginForm.get('email');
   }
 
-  public get password (): any {
+  public get password(): any {
     return this.loginForm.get('password');
   }
 }
