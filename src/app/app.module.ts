@@ -20,6 +20,14 @@ const approutes: Routes = [
   { path: '**', component: PageNotFoundComponent }
 ];
 
+import {RecruitmentComponent} from "./components/recruitment/recruitment.component";
+
+import { LoginComponent } from './components/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AdminComponent } from './components/admin/admin.component';
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +35,11 @@ const approutes: Routes = [
     UsersComponent,
     PageCreateUserComponent,
     PageNotFoundComponent,
-    ButtonComponent
+    ButtonComponent,
+    RecruitmentComponent,
+    LoginComponent,
+    AdminComponent
+
   ],
   imports: [
     BrowserModule,
@@ -37,7 +49,11 @@ const approutes: Routes = [
     MatButtonModule,
     MatIconModule,
     MatInputModule,
-    RouterModule.forRoot(approutes)
+    RouterModule.forRoot(approutes),
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
