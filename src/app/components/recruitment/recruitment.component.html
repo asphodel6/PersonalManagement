@@ -6,33 +6,34 @@
     <div class="img-block">
       <img class="img" src="/assets/cloudImg.svg" alt="">
     </div>
-    <ng-container *ngFor="let card of cardsOfInputs">
-      <div [ngTemplateOutlet]="cardInput" [ngTemplateOutletContext] = card>
+    <ng-container *ngFor="let card of cardsOfInputs; trackBy: trackByControlName">
+      <div [ngTemplateOutlet]="cardInput" [ngTemplateOutletContext] = "card">
 
       </div>
     </ng-container>
 
-    <button class="button" type='submit' [disabled]="recruitmentForm.invalid">Сохранить</button>
+    <button class="button" type="submit" [disabled]="recruitmentForm.invalid">Сохранить</button>
   </div>
 
   <ng-template #cardInput let-label="label" let-controlName="controlName">
     <ng-container [ngSwitch]="controlName">
       <div *ngSwitchCase=" 'dateOfBirth' " class="cardOfInput">
         <div class="label-input">{{ label }}</div>
-        <div class="invalid" *ngIf="recruitmentForm.get(controlName)?.invalid && recruitmentForm.get(controlName)?.touched"> {{controlName}} is wrong </div>
-        <input class="input" type='date' formControlName={{controlName}}>
+
+        <div class="invalid" *ngIf="ValidationElementMethod(controlName)">{{controlName}} is wrong</div>
+        <input class="input" type="date" [formControlName]="controlName">
       </div>
 
       <div *ngSwitchCase=" 'telephone' " class="cardOfInput">
         <div class="label-input">{{ label }}</div>
-        <div class="invalid" *ngIf="recruitmentForm.get(controlName)?.invalid && recruitmentForm.get(controlName)?.touched"> {{controlName}} is wrong </div>
-        <input class="input" type='tel' formControlName={{controlName}}>
+        <div class="invalid" *ngIf="ValidationElementMethod(controlName)">{{controlName}} is wrong</div>
+        <input class="input" type="tel" [formControlName]="controlName">
       </div>
 
       <div *ngSwitchDefault class="cardOfInput">
         <div class="label-input">{{ label }}</div>
-        <div class="invalid" *ngIf="recruitmentForm.get(controlName)?.invalid && recruitmentForm.get(controlName)?.touched"> {{controlName}} is wrong </div>
-        <input class="input" type='text' formControlName={{controlName}}>
+        <div class="invalid" *ngIf="ValidationElementMethod(controlName)">{{controlName}} is wrong</div>
+        <input class="input" type="text" [formControlName]="controlName">
 
       </div>
     </ng-container>

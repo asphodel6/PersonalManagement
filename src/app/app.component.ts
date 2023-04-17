@@ -4,7 +4,7 @@ import {RecruitmentComponent} from "./components/recruitment/recruitment.compone
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   public title: string = 'personal_management';
