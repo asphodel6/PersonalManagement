@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {RecruitmentComponent} from "./components/recruitment/recruitment.component";
+import { RecruitmentComponent } from './components/recruitment/recruitment.component';
 
 @Component({
   selector: 'app-root',
