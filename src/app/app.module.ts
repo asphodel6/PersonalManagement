@@ -10,14 +10,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RouterModule, Routes  } from '@angular/router';
 import { UsersComponent } from './users/users.component';
-import { CreateUserComponent } from './create-user/create-user.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { PageCreateUserComponent } from './create-user/create-user.component';
+import { PageNotFoundComponent } from './not-found/not-found.component';
 import { ButtonComponent } from './components/button/button.component';
 
 const approutes: Routes = [
   { path: '', component: UsersComponent },
-  { path: 'createuser', component: CreateUserComponent },
-  { path: '**', component: NotFoundComponent }
+  { path: 'createuser', component: PageCreateUserComponent },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
@@ -25,8 +25,8 @@ const approutes: Routes = [
     AppComponent,
     SidebarComponent,
     UsersComponent,
-    CreateUserComponent,
-    NotFoundComponent,
+    PageCreateUserComponent,
+    PageNotFoundComponent,
     ButtonComponent
   ],
   imports: [
@@ -40,6 +40,6 @@ const approutes: Routes = [
     RouterModule.forRoot(approutes)
   ],
   providers: [],
-  bootstrap: [AppComponent, SidebarComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
