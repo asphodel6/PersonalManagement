@@ -20,7 +20,7 @@ const approutes: Routes = [
   { path: '**', component: PageNotFoundComponent }
 ];
 
-import {RecruitmentComponent} from "./components/recruitment/recruitment.component";
+import { RecruitmentComponent } from './components/recruitment/recruitment.component';
 
 import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
