@@ -14,7 +14,7 @@
   font-size: 50px;
   line-height: 75px;
   margin-top: 72px;
-  margin-right: 286px;
+  margin-right: 425px;
 }
 
 .text {
@@ -23,28 +23,21 @@
 }
 
 .description {
-  margin-right: 331px;
+  margin-right: 454px;
 }
 
 .email-description {
-  margin-top: 170px;
+  margin-top: 40px;
   margin-right: 604px;
 }
 
-.inputForm {
+.registrationForm {
   background-color: #3B3B41;
   width: 575px;
   height: 60px;
   margin-top: 5px;
   margin-bottom: 5px;
   color: $color-text;
-}
-
-.additional {
-  display: grid;
-  grid-template-areas: 'a b';
-  justify-content: space-between;
-  padding-right: 74px;
 }
 
 .danger {
@@ -62,7 +55,7 @@ button {
   height: 80px;
 }
 
-.registration {
+.login {
   margin-top: 82px;
   margin-bottom: 70px;
 }

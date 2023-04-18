@@ -2,7 +2,9 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { IUser } from '../interfaces/login.user.interface';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { catchError, from, Subscription } from 'rxjs';
+import { catchError, from, Observable, Subscription } from 'rxjs';
+import firebase from 'firebase/compat';
+import FirebaseError = firebase.FirebaseError;
 
 
 @Injectable({
@@ -17,8 +19,8 @@ export class AuthService implements OnDestroy{
   }
 
   public login(user: IUser): void {
-    const observable = from(this._fireAuth.signInWithEmailAndPassword(user.email, user.password)).pipe(
-      catchError((error) => {
+    const observable: Observable<firebase.auth.UserCredential> = from(this._fireAuth.signInWithEmailAndPassword(user.email, user.password)).pipe(
+      catchError((error: FirebaseError) => {
         if (error.code) {
           alert('Wrong email or password');
         }
@@ -29,6 +31,21 @@ export class AuthService implements OnDestroy{
     this._subscription = observable.subscribe(() => {
       localStorage.setItem('token', 'true');
       this._router.navigate(['admin']);
+    });
+  }
+
+  public singUp(user: IUser): void {
+    const observable: Observable<firebase.auth.UserCredential> = from(this._fireAuth.createUserWithEmailAndPassword(user.email, user.password)).pipe(
+      catchError((error: FirebaseError) => {
+        if (error.code) {
+          alert('Registration failed');
+        }
+
+        return [];
+      })
+    );
+    this._subscription = observable.subscribe(() => {
+      this._router.navigate(['login']);
     });
   }
 

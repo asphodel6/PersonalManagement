@@ -2,19 +2,24 @@
   <div class="title">Welcome Back</div>
   <div class="text description">Sign in to continue your progress</div>
   <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
-    <div class="text email-description">Email / Username</div>
+    <div class="text email-description">Email</div>
     <div><input class="inputForm" type="email" formControlName="email"></div>
-    <div *ngIf="email.invalid && email.touched"><small class="danger">Email is required</small></div>
+    <div *ngIf="email.invalid && email.touched" class="danger">
+      <div *ngIf="email.errors.required">Email is required</div>
+      <div *ngIf="email.errors?.['email']">Invalid email format</div>
+    </div>
     <div class="text">Password</div>
     <div><input class="inputForm" type="password" formControlName="password"></div>
-    <div *ngIf="password.invalid && password.touched"><small class="danger">Password is required</small></div>
+    <div *ngIf="password.invalid && password.touched" class="danger">
+      <div *ngIf="password.errors.required">Password is required</div>
+      <div *ngIf="password.errors.pattern">Password must be at least 8 characters long and have numbers</div>
+    </div>
     <div class="additional">
-      <div class="text"><input type="checkbox">Remember me</div>
       <div class="text">Forget password?</div>
     </div>
     <div>
       <button [disabled]="loginForm.invalid">Sign in</button>
     </div>
-    <div class="text registration">Don’t have an account? <span>Register Here</span></div>
+    <div class="text registration">Don’t have an account? <span routerLink="/registration">Register Here</span></div>
   </form>
 </div>
