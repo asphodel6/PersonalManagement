@@ -1,0 +1,45 @@
+
+<div class="container">
+  <div class="highlightBlock">
+    <img src="/" alt="" class="img">
+    <div class="description">
+      <span class="highlight">{{ workerData.name }}</span>
+      <span class="highlight">{{ workerData.profession }}</span>
+      <span class="highlight">возраст: {{ workerData.age }}</span>
+      <span class="highlight">{{ workerData.currentSalary }} RUB</span>
+    </div>
+  </div>
+
+  <div class="userInformationBlock">
+    <h3 class="h3">Сведения о пользователе</h3>
+
+    <div class="graph">
+      <canvas id="myChart"></canvas>
+    </div>
+
+    <div class="additionalInformation">
+      <ng-container *ngFor="let card of workerData.additionalInformation">
+        <div class="card">
+          <div class="label">{{ card.label }}</div>
+          <div class="value">{{ card.value }}</div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="eventHistory">
+    <div class="eventHistory__head">
+      <span class="eventHistory__h">История событий</span>
+      <div class="filter">
+        <span class="filter__span">Фильтры</span>
+
+      </div>
+    </div>
+    <div class="events">
+      <ng-container *ngFor="let event of workerData.eventHistory.reverse()">
+        <div class="event">{{ event }}</div>
+      </ng-container>
+    </div>
+  </div>
+
+</div>

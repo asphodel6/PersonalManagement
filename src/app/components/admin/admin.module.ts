@@ -10,13 +10,15 @@ import { ButtonComponent } from './components/button/button.component';
 import { AdminComponent } from './admin.component';
 import { RecruitmentComponent } from './components/recruitment/recruitment.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { WorkerComponent } from "./components/worker/worker.component";
 
 @NgModule({
   declarations: [
     SidebarComponent,
     ButtonComponent,
     AdminComponent,
-    RecruitmentComponent
+    RecruitmentComponent,
+    WorkerComponent,
   ],
   imports: [
     CommonModule,
