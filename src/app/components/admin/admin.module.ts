@@ -10,13 +10,21 @@ import { ButtonComponent } from './components/button/button.component';
 import { AdminComponent } from './admin.component';
 import { RecruitmentComponent } from './components/recruitment/recruitment.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { UsersComponent } from '../users/users.component';
+import { FilterPipe } from '../users/pipes/search.component';
+import { FormsModule } from '@angular/forms';
+import { AccountsHttpService } from '../users/services/userdata.service';
 
 @NgModule({
   declarations: [
     SidebarComponent,
     ButtonComponent,
     AdminComponent,
-    RecruitmentComponent
+    RecruitmentComponent,
+    UsersComponent,
+    FilterPipe
   ],
   imports: [
     CommonModule,
@@ -25,7 +33,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSidenavModule,
     MatButtonModule,
     MatInputModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    FormsModule
+  ],
+  providers: [AccountsHttpService]
 })
 export class AdminModule { }

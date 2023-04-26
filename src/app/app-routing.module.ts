@@ -8,11 +8,11 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
-  { path: '', redirectTo: '/login', pathMatch:'full' },
+  { path: '', redirectTo: '/admin', pathMatch:'full' },
   { path: 'admin',
     canActivate: [AuthGuard],
     canDeactivate: [AuthGuard],
-    loadChildren: () => import('./components/admin/admin.module').then((m) => m.AdminModule)
+    loadChildren: () => import('./components/admin/admin.module').then((m: typeof import('c:/Users/PC1/Documents/GitHub/PersonalManagement/src/app/components/admin/admin.module')) => m.AdminModule)
   },
   { path: '**', component: NotFoundComponent }
 ];
