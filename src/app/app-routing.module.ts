@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
-import { RegistrationComponent } from './components/registration/registration.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { RegistrationComponent } from './pages/registration/registration.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'admin',
     canActivate: [AuthGuard],
     canDeactivate: [AuthGuard],
-    loadChildren: () => import('./components/admin/admin.module').then((m) => m.AdminModule)
+    loadChildren: () => import('./components/children/admin/admin.module').then((m: any) => m.AdminModule)
   },
   { path: '**', component: NotFoundComponent }
 ];

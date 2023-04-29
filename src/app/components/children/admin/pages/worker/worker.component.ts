@@ -1,7 +1,8 @@
-import { Component } from "@angular/core";
-import { IWorker } from '../../../../interfaces/worker.interface';
+import { Component } from '@angular/core';
+import { IWorker } from '../../interfaces/worker.interface';
 import { OnInit } from "@angular/core";
 import { Chart } from 'chart.js';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 
 @Component({
@@ -23,7 +24,10 @@ export class WorkerComponent{
       { label: 'Дата рождения', value: '18.06.2004' },
       { label: 'Дата устройства', value: '23.08.2008' },
       { label: 'Образование', value: 'Высшее' },
-      { label: 'Наименование уч. Учереждения', value: 'Институт радиоэлектроники и информационных технологий - Радиотехнический факультет' },
+      {
+        label: 'Наименование уч. Учереждения',
+        value: 'Институт радиоэлектроники и информационных технологий - Радиотехнический факультет'
+      },
     ],
     salaryStatistic: [
       { date: '23.08.2008', sum: 345 },
@@ -38,7 +42,18 @@ export class WorkerComponent{
       { date: '23.05.2009', sum: 435 },
     ],
     eventHistory: ['Начать работать', 'Получить миска рис', 'Совершить ошибка Партия не одобрят', 'Изъять миска рис', 'Исправить ошибка Партия рад', 'Сдавать тест квалификация АП', 'Успешно работать новая должность', 'Получить кошка жена'],
-  }
+  };
+
+  // public items!: any[];
+  //
+  // constructor(private db: AngularFireDatabase) {
+  //   this.db.list('employees').valueChanges().subscribe(items => {
+  //     this.items = items;
+  //     console.log(items);
+  //   });
+  // }
+  //
+  // ngOnInit() {
+  //
+  // }
 }
-
-

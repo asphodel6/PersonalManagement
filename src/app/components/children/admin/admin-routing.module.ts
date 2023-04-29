@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
-import { RecruitmentComponent } from './components/recruitment/recruitment.component';
-import { WorkerComponent } from "./components/worker/worker.component";
+import { RecruitmentComponent } from './pages/recruitment/recruitment.component';
+import { WorkersComponent } from './pages/workers/workers.component';
+import { WorkerComponent } from './pages/worker/worker.component';
 
 const routes: Routes = [
   {
     path: '', component: AdminComponent,
     children: [
       { path: 'recruitment', component: RecruitmentComponent },
-      { path: 'users', component: WorkerComponent },
+      { path: 'workers', component: WorkersComponent },
+      { path: 'worker', component: WorkerComponent }
     ]
   }
 ];

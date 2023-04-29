@@ -7,9 +7,7 @@ import firebase from 'firebase/compat';
 import FirebaseError = firebase.FirebaseError;
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
 export class AuthService implements OnDestroy{
 
