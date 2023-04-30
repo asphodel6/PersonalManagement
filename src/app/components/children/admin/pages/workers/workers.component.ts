@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { IUser } from '../../interfaces/workers.interface';
+import { IWorkers } from '../../interfaces/workers.interface';
 import { PageEvent } from '@angular/material/paginator';
 import { WorkersService } from '../../services/workers.service';
+import { Observable } from 'rxjs';
 const sortIcon: string =
   `
 <svg width="13" height="26" viewBox="0 0 13 26" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -24,7 +25,8 @@ const sortIcon: string =
   styleUrls: ['./workers.component.scss'],
 })
 export class WorkersComponent implements OnInit {
-  public users: IUser[] = [];
+
+  public workers!: Observable<IWorkers[]>;
 
   public searchText: string = '';
   public pageEvent: PageEvent = new PageEvent();
@@ -43,25 +45,14 @@ export class WorkersComponent implements OnInit {
   }
 
   public getServerData(event?: PageEvent): PageEvent {
-    this.workersServive.getUsers(event).subscribe(
-      (response: IUser[]) => {
-        if (!response) {
-          // handle error
-        } else {
-          this.pageIndex = event?.pageIndex || 0;
-          this.length = event?.length || 0;
-          this.users = response;
-        }
-      },
-    );
-
     return event || new PageEvent();
   }
   public ngOnInit(): void {
     const initPage: PageEvent = new PageEvent();
     initPage.pageIndex = 0;
     initPage.pageSize = 10;
-    initPage.length = this.workersServive.getCount();
+    initPage.length = 4;
     this.getServerData(initPage);
+    this.workers = this.workersServive.getWorkers();
   }
 }

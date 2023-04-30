@@ -39,20 +39,21 @@
   </div>
 </div>
 <div class="content">
-  <div *ngFor="let user of users | appFilter: searchText, let x = index" class="user-container" [ngClass]="{
+  <div *ngFor="let worker of workers | async let x = index" class="user-container" [ngClass]="{
     even: (x % 2 !== 0)
   }" >
     <div class="user-field user-name">
-      {{user.name}}
+      {{worker.name}}
     </div>
     <div class="user-field">
-      {{user.position}}
+      {{worker.profession}}
     </div>
     <div class="user-field">
-      {{user.place}}
+      {{worker.place}}
     </div>
     <div class="user-field">
-      {{user.salary | currency}}
+      {{worker.currentSalary}}
     </div>
   </div>
+<!--  <div *ngFor="let worker of workers | async">{{worker.name}} {{worker.place}} </div>-->
 </div>

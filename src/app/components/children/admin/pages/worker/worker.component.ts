@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
 import { IWorker } from '../../interfaces/worker.interface';
-import { OnInit } from "@angular/core";
-import { Chart } from 'chart.js';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
-
 
 @Component({
   selector: 'admin-worker',
@@ -43,17 +39,4 @@ export class WorkerComponent{
     ],
     eventHistory: ['Начать работать', 'Получить миска рис', 'Совершить ошибка Партия не одобрят', 'Изъять миска рис', 'Исправить ошибка Партия рад', 'Сдавать тест квалификация АП', 'Успешно работать новая должность', 'Получить кошка жена'],
   };
-
-  // public items!: any[];
-  //
-  // constructor(private db: AngularFireDatabase) {
-  //   this.db.list('employees').valueChanges().subscribe(items => {
-  //     this.items = items;
-  //     console.log(items);
-  //   });
-  // }
-  //
-  // ngOnInit() {
-  //
-  // }
 }

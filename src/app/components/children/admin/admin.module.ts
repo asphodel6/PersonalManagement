@@ -42,7 +42,6 @@ import { WorkersService } from './services/workers.service';
     AngularFireDatabaseModule,
     FormsModule,
     MatPaginatorModule,
-    HttpClientModule
   ],
   providers: [WorkersService]
 })
