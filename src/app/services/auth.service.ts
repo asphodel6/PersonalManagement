@@ -1,23 +1,24 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { IUser } from '../interfaces/login.user.interface';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { catchError, from, Observable, Subscription } from 'rxjs';
+import { catchError, from, takeUntil } from 'rxjs';
 import firebase from 'firebase/compat';
 import FirebaseError = firebase.FirebaseError;
+import { DestoryService } from './destory.service';
 
 
 @Injectable()
 
-export class AuthService implements OnDestroy{
+export class AuthService{
 
-  private _subscription!: Subscription;
-  constructor(private _router: Router, private _fireAuth: AngularFireAuth) {
+  constructor(private _router: Router, private _fireAuth: AngularFireAuth, private _destory$: DestoryService) {
 
   }
 
   public login(user: IUser): void {
-    const observable: Observable<firebase.auth.UserCredential> = from(this._fireAuth.signInWithEmailAndPassword(user.email, user.password)).pipe(
+    from(this._fireAuth.signInWithEmailAndPassword(user.email, user.password)).pipe(
+      takeUntil(this._destory$),
       catchError((error: FirebaseError) => {
         if (error.code) {
           alert('Wrong email or password');
@@ -25,15 +26,15 @@ export class AuthService implements OnDestroy{
 
         return [];
       })
-    );
-    this._subscription = observable.subscribe(() => {
+    ).subscribe(() => {
       localStorage.setItem('token', 'true');
       this._router.navigate(['admin']);
     });
   }
 
   public singUp(user: IUser): void {
-    const observable: Observable<firebase.auth.UserCredential> = from(this._fireAuth.createUserWithEmailAndPassword(user.email, user.password)).pipe(
+    from(this._fireAuth.createUserWithEmailAndPassword(user.email, user.password)).pipe(
+      takeUntil(this._destory$),
       catchError((error: FirebaseError) => {
         if (error.code) {
           alert('Registration failed');
@@ -41,14 +42,11 @@ export class AuthService implements OnDestroy{
 
         return [];
       })
-    );
-    this._subscription = observable.subscribe(() => {
-      this._router.navigate(['login']);
-    });
+    ).subscribe(() => this._router.navigate(['login']));
   }
 
-  public ngOnDestroy(): void {
-    this._subscription.unsubscribe();
+  public isLoggedIn(): boolean {
+    return localStorage.getItem('token') === 'true';
   }
 }
 

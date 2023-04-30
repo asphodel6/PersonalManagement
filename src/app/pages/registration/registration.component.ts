@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
@@ -24,6 +24,10 @@ export class RegistrationComponent implements OnInit{
       'password': new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)]),
       'repeat': new FormControl('',[Validators.required])
     });
+
+    if (this._authService.isLoggedIn()) {
+      this._router.navigate(['admin']);
+    }
   }
 
   public createUser(): void {

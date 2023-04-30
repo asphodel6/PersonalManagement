@@ -1,4 +1,4 @@
 export interface IUser {
-  email: string,
-  password: string
+  readonly email: string,
+  readonly password: string
 }

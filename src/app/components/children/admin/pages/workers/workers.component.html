@@ -1,1 +1,58 @@
-
+<div class="header">
+  <div class="container-top">
+    <div>
+      <mat-form-field appearance="outline" class="search">
+        <mat-label>Поиск</mat-label>
+        <input matInput [(ngModel)]="searchText" type="text">
+      </mat-form-field>
+    </div>
+    <div >
+      <mat-paginator class="paginator"
+                     [length]="length"
+                     [pageIndex]="pageIndex"
+                     [pageSize]="pageSize"
+                     [pageSizeOptions]="[10, 50, 100]"
+                     (page)="pageEvent = getServerData($event)"
+                     aria-label="Select page"
+                     hidePageSize="true"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+  <div class="container-bottom">
+    <div class="sort-field">
+      <p class="field-text">Имя</p>
+      <mat-icon svgIcon="sortIco" aria-hidden="false" aria-label="sort by"></mat-icon>
+    </div>
+    <div class="sort-field">
+      <p class="field-text">Позиция</p>
+      <mat-icon svgIcon="sortIco" aria-hidden="false" aria-label="sort by"></mat-icon>
+    </div>
+    <div class="sort-field">
+      <p class="field-text">Офис</p>
+      <mat-icon svgIcon="sortIco" aria-hidden="false" aria-label="sort by"></mat-icon>
+    </div>
+    <div class="sort-field">
+      <p class="field-text">Ставка</p>
+      <mat-icon svgIcon="sortIco" aria-hidden="false" aria-label="sort by"></mat-icon>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div *ngFor="let user of users | appFilter: searchText, let x = index" class="user-container" [ngClass]="{
+    even: (x % 2 !== 0)
+  }" >
+    <div class="user-field user-name">
+      {{user.name}}
+    </div>
+    <div class="user-field">
+      {{user.position}}
+    </div>
+    <div class="user-field">
+      {{user.place}}
+    </div>
+    <div class="user-field">
+      {{user.salary | currency}}
+    </div>
+  </div>
+</div>

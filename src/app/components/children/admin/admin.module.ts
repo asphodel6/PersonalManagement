@@ -9,12 +9,16 @@ import { MatInputModule } from '@angular/material/input';
 import { ButtonComponent } from './components/button/button.component';
 import { AdminComponent } from './admin.component';
 import { RecruitmentComponent } from './pages/recruitment/recruitment.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WorkerComponent } from './pages/worker/worker.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../../../../environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { WorkersComponent } from './pages/workers/workers.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { FilterPipe } from './pipes/search.component';
+import { HttpClientModule } from '@angular/common/http';
+import { WorkersService } from './services/workers.service';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,7 @@ import { WorkersComponent } from './pages/workers/workers.component';
     RecruitmentComponent,
     WorkerComponent,
     WorkersComponent,
+    FilterPipe,
   ],
   imports: [
     CommonModule,
@@ -34,7 +39,11 @@ import { WorkersComponent } from './pages/workers/workers.component';
     MatInputModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
-  ]
+    AngularFireDatabaseModule,
+    FormsModule,
+    MatPaginatorModule,
+    HttpClientModule
+  ],
+  providers: [WorkersService]
 })
 export class AdminModule { }

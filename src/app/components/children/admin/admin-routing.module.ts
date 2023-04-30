@@ -11,7 +11,8 @@ const routes: Routes = [
     children: [
       { path: 'recruitment', component: RecruitmentComponent },
       { path: 'workers', component: WorkersComponent },
-      { path: 'worker', component: WorkerComponent }
+      { path: 'worker', component: WorkerComponent },
+      { path: '', redirectTo: 'workers', pathMatch: 'full' }
     ]
   }
 ];

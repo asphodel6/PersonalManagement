@@ -1,0 +1,73 @@
+@import '../../../../../../styles';
+
+.header {
+  background-color: $color-green;
+  width: 100%;
+}
+.search{
+  width: 500px;
+  padding: 15px;
+}
+
+.container-top{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.paginator{
+  padding: 15px;
+  background-color: $color-green;
+}
+.container-bottom{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.sort-field{
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  color: $color-text;
+  display: flex;
+  width: 25%;
+  padding: 0 30px 0 10px;
+}
+.field-text {
+  margin-right: auto;
+}
+.content {
+  color: $color-text;
+  width: 100%;
+
+}
+.user-container{
+  font-family: 'Roboto';
+  display: flex;
+  min-height: 60px;
+  align-items: center;
+  background-color: $color-primary;
+  padding: 0 15px;
+}
+.user-field {
+  width: 25%;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: $color-text;
+}
+.user-name {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 28px;
+  color: $color-text;
+}
+.even{
+  background-color: $color-secondary
+}
