@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IUser, IWorkers } from '../interfaces/workers.interface';
+import { IWorkers } from '../interfaces/workers.interface';
 
 @Pipe({ name: 'appFilter' })
 export class FilterPipe implements PipeTransform {
