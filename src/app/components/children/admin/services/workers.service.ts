@@ -9,6 +9,6 @@ export class WorkersService  {
   constructor(private _db: AngularFireDatabase) {}
 
   public getWorkers(): Observable<IWorkers[]> {
-    return this._db.list<IWorkers>('employees').valueChanges();
+    return this._db.list<IWorkers>('employees').valueChanges(undefined,{});
   }
 }

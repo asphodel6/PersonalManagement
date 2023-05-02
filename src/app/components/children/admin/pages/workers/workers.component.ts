@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { IWorkers } from '../../interfaces/workers.interface';
 import { PageEvent } from '@angular/material/paginator';
 import { WorkersService } from '../../services/workers.service';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 const sortIcon: string =
   `
 <svg width="13" height="26" viewBox="0 0 13 26" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -25,13 +25,12 @@ const sortIcon: string =
   styleUrls: ['./workers.component.scss'],
 })
 export class WorkersComponent implements OnInit {
-
   public workers!: Observable<IWorkers[]>;
-
+  public visibleWorkers!: Observable<IWorkers[]>;
   public searchText: string = '';
   public pageEvent: PageEvent = new PageEvent();
   public pageIndex: number = 0;
-  public pageSize: number = 10;
+  public pageSize: number = 3;
   public length: number = 0;
   constructor(
     iconRegistry: MatIconRegistry,
@@ -44,15 +43,20 @@ export class WorkersComponent implements OnInit {
     );
   }
 
-  public getServerData(event?: PageEvent): PageEvent {
+  public getServerData(event: PageEvent): PageEvent {
+    this.workers.subscribe((x:IWorkers[]) => this.length = x.length);
+
+    this.visibleWorkers = this.workers
+      .pipe(map((x:any) => {
+        return x.filter((el: any, index: number) => index + 1 > event.pageIndex * this.pageSize && index + 1 <= event.pageIndex* this.pageSize + this.pageSize);
+      }));
+
     return event || new PageEvent();
   }
   public ngOnInit(): void {
     const initPage: PageEvent = new PageEvent();
     initPage.pageIndex = 0;
-    initPage.pageSize = 10;
-    initPage.length = 4;
-    this.getServerData(initPage);
     this.workers = this.workersServive.getWorkers();
+    this.getServerData(initPage);
   }
 }

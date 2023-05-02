@@ -10,7 +10,7 @@ export class FilterPipe implements PipeTransform {
    * @param searchText search string
    * @returns list of elements filtered by search text or []
    */
-  public transform(items: IWorkers[], searchText: string): IWorkers[] {
+  public transform(items: IWorkers[] | null, searchText: string): IWorkers[] {
     if (!items) {
       return [];
     }
