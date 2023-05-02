@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { WorkersService } from '../../services/workers.service';
+import { IWorker } from '../../interfaces/worker.interface';
 
 type Card = {
   controlName: string,
@@ -13,6 +15,7 @@ type Card = {
 })
 
 export class RecruitmentComponent{
+
   public readonly cardsOfInputs: Card[] = [
     { controlName: 'name', label: 'Имя' },
     { controlName: 'surname', label: 'Фамилия' },
@@ -25,6 +28,8 @@ export class RecruitmentComponent{
     { controlName: 'education', label: 'Образование' },
   ];
 
+  constructor(private _workersService: WorkersService) {
+  }
 
   protected trackByControlName(index:number, card: Card) {
     return card.controlName;
@@ -56,7 +61,6 @@ export class RecruitmentComponent{
   }
 
   protected submitRecruitment(): void {
-    // Create new worker logic
-    console.log(this.recruitmentForm.value);
+    this._workersService.setWorker(<IWorker>this.recruitmentForm.value);
   }
 }
