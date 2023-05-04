@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="title">Welcome</div>
+  <div class="text description">Create account here</div>
+  <form [formGroup]="registrationForm" (ngSubmit)="createUser()">
+    <div class="text email-description">Email</div>
+    <div><input class="registrationForm" type="email" formControlName="email"></div>
+    <div *ngIf="email.invalid && email.touched" class="danger">
+      <div *ngIf="email.errors.required">Email is required</div>
+      <div *ngIf="email.errors?.['email']">Invalid email format</div>
+    </div>
+    <div class="text">Password</div>
+    <div><input class="registrationForm" type="password" formControlName="password"></div>
+    <div *ngIf="password.invalid && password.touched" class="danger">
+      <div *ngIf="password.errors.required">Password is required</div>
+      <div *ngIf="password.errors.pattern">Password must be at least 8 characters long and have numbers</div>
+    </div>
+    <div class="text">Repeat password</div>
+    <div><input class="registrationForm" type="password" formControlName="repeat"></div>
+    <div *ngIf="repeat.touched" class="danger">
+      <div *ngIf="password.value !== repeat.value">Passwords must match</div>
+    </div>
+    <div>
+      <button [disabled]="registrationForm.invalid || (password.value !== repeat.value)">Create</button>
+    </div>
+    <div class="text login">Already have account? <span routerLink="/login">Sign up Here</span></div>
+  </form>
+</div>

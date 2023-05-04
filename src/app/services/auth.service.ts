@@ -1,39 +1,52 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { IUser } from '../interfaces/login.user.interface';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { catchError, from, Subscription } from 'rxjs';
+import { catchError, from, takeUntil } from 'rxjs';
+import firebase from 'firebase/compat';
+import FirebaseError = firebase.FirebaseError;
+import { DestoryService } from './destory.service';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
-export class AuthService implements OnDestroy{
+export class AuthService{
 
-  private _subscription!: Subscription;
-  constructor(private _router: Router, private _fireAuth: AngularFireAuth) {
+  constructor(private _router: Router, private _fireAuth: AngularFireAuth, private _destory$: DestoryService) {
 
   }
 
   public login(user: IUser): void {
-    const observable = from(this._fireAuth.signInWithEmailAndPassword(user.email, user.password)).pipe(
-      catchError((error) => {
+    from(this._fireAuth.signInWithEmailAndPassword(user.email, user.password)).pipe(
+      takeUntil(this._destory$),
+      catchError((error: FirebaseError) => {
         if (error.code) {
           alert('Wrong email or password');
         }
 
         return [];
       })
-    );
-    this._subscription = observable.subscribe(() => {
+    ).subscribe(() => {
       localStorage.setItem('token', 'true');
       this._router.navigate(['admin']);
     });
   }
 
-  public ngOnDestroy(): void {
-    this._subscription.unsubscribe();
+  public singUp(user: IUser): void {
+    from(this._fireAuth.createUserWithEmailAndPassword(user.email, user.password)).pipe(
+      takeUntil(this._destory$),
+      catchError((error: FirebaseError) => {
+        if (error.code) {
+          alert('Registration failed');
+        }
+
+        return [];
+      })
+    ).subscribe(() => this._router.navigate(['login']));
+  }
+
+  public isLoggedIn(): boolean {
+    return localStorage.getItem('token') === 'true';
   }
 }
 
