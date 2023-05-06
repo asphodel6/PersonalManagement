@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { WorkersService } from '../../services/workers.service';
 import { IWorker } from '../../interfaces/worker.interface';
@@ -11,7 +11,8 @@ type Card = {
 @Component({
   selector: 'admin-recruitment',
   templateUrl: './recruitment.component.html',
-  styleUrls: ['./recruitment.component.scss']
+  styleUrls: ['./recruitment.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class RecruitmentComponent{

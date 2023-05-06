@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import {Component, OnInit, NgZone, ChangeDetectionStrategy} from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { IWorkers } from '../../interfaces/workers.interface';
@@ -23,6 +23,7 @@ const sortIcon: string =
   selector: 'admin-workers',
   templateUrl: './workers.component.html',
   styleUrls: ['./workers.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkersComponent implements OnInit {
   public workers!: Observable<IWorkers[]>;

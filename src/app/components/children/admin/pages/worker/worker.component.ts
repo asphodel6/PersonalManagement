@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { IWorker } from '../../interfaces/worker.interface';
 
 @Component({
   selector: 'admin-worker',
   templateUrl: './worker.component.html',
-  styleUrls: ['./worker.component.scss']
+  styleUrls: ['./worker.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkerComponent{
 
