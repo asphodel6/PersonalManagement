@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { WorkersService } from '../../services/workers.service';
 import { IWorker } from '../../interfaces/worker.interface';
 
-type Card = {
+export type Card = {
   controlName: string,
   label: string,
 }
@@ -17,6 +17,20 @@ type Card = {
 
 export class RecruitmentComponent{
 
+  public readonly patternForValidationName: string = '^(?=.*[а-яА-яA-Za-z])[а-яА-яA-Za-z]{2,}$';
+
+  public recruitmentForm: FormGroup = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.pattern(this.patternForValidationName),Validators.maxLength(15)]),
+    surname: new FormControl('', [Validators.required, Validators.pattern(this.patternForValidationName),Validators.maxLength(20)]),
+    patronymic: new FormControl('', [Validators.required, Validators.pattern(this.patternForValidationName),Validators.maxLength(15)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    telephone: new FormControl('', [Validators.required, Validators.pattern(/^\+7\d{10}$/)]),
+    position: new FormControl('', Validators.required),
+    dateOfBirth: new FormControl('', Validators.required),
+    completedEducationalInstitution: new FormControl('', Validators.required),
+    education: new FormControl('', Validators.required),
+  });
+
   public readonly cardsOfInputs: Card[] = [
     { controlName: 'name', label: 'Имя' },
     { controlName: 'surname', label: 'Фамилия' },
@@ -29,39 +43,15 @@ export class RecruitmentComponent{
     { controlName: 'education', label: 'Образование' },
   ];
 
+
   constructor(private _workersService: WorkersService) {
   }
 
-  protected trackByControlName(index:number, card: Card) {
+  public trackByControlName(index:number, card: Card): string {
     return card.controlName;
   }
 
-  private readonly patternForValidationName = '^(?=.*[а-яА-яA-Za-z])[а-яА-яA-Za-z]{2,}$';
-
-  protected recruitmentForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.pattern(this.patternForValidationName),Validators.maxLength(15)]),
-    surname: new FormControl('', [Validators.required, Validators.pattern(this.patternForValidationName),Validators.maxLength(20)]),
-    patronymic: new FormControl('', [Validators.required, Validators.pattern(this.patternForValidationName),Validators.maxLength(15)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    telephone: new FormControl('', [Validators.required, Validators.pattern(/^\+7\d{10}$/)]),
-    position: new FormControl('', Validators.required),
-    dateOfBirth: new FormControl('', Validators.required),
-    completedEducationalInstitution: new FormControl('', Validators.required),
-    education: new FormControl('', Validators.required),
-  });
-
-
-  ValidationElementMethod(controlName: string): boolean {
-    return !!(this.recruitmentForm.get(controlName)?.invalid && this.recruitmentForm.get(controlName)?.touched);
-  }
-
-
-  protected InvalidMethod(controlName: string) {
-
-    return !!(this.recruitmentForm.get(controlName)?.invalid && this.recruitmentForm.get(controlName)?.touched);
-  }
-
-  protected submitRecruitment(): void {
+  public submitRecruitment(): void {
     this._workersService.setWorker(<IWorker>this.recruitmentForm.value);
   }
 }

@@ -13,16 +13,40 @@
     <h3 class="h3">Сведения о пользователе</h3>
 
     <div class="graph">
-      <canvas id="myChart"></canvas>
+      <worker-salary-graph [myData]="workerData.salaryStatistic"/>
+
     </div>
 
     <div class="additionalInformation">
-      <ng-container *ngFor="let card of workerData.additionalInformation">
-        <div class="card">
-          <div class="label">{{ card.label }}</div>
-          <div class="value">{{ card.value }}</div>
-        </div>
-      </ng-container>
+      <div class="card">
+        <div class="label">Электронная почта</div>
+        <div class="value">{{ workerData.email }}</div>
+      </div>
+
+      <div class="card">
+        <div class="label">Телефон</div>
+        <div class="value">{{ workerData.phone }}</div>
+      </div>
+
+      <div class="card">
+        <div class="label">Дата рождения</div>
+        <div class="value">{{ workerData.dateOfBirth }}</div>
+      </div>
+
+      <div class="card">
+        <div class="label">Дата устройства</div>
+        <div class="value">{{ workerData.deviceDate }}</div>
+      </div>
+
+      <div class="card">
+        <div class="label">Обучение</div>
+        <div class="value">{{ workerData.education }}</div>
+      </div>
+
+      <div class="card">
+        <div class="label">Название Уч. заведения</div>
+        <div class="value">{{ workerData.institution }}</div>
+      </div>
     </div>
   </div>
 
@@ -35,7 +59,7 @@
       </div>
     </div>
     <div class="events">
-      <ng-container *ngFor="let event of workerData.eventHistory.reverse()">
+      <ng-container *ngFor="let event of workerData.eventHistory">
         <div class="event">{{ event }}</div>
       </ng-container>
     </div>

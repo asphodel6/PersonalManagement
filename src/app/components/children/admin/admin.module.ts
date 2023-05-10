@@ -19,6 +19,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { FilterPipe } from './pipes/search.component';
 import { HttpClientModule } from '@angular/common/http';
 import { WorkersService } from './services/workers.service';
+import { GraphComponent } from './components/graph/graph.component';
+import { NgChartsModule } from 'ng2-charts';
+import { InputComponent } from './components/input/input.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,8 @@ import { WorkersService } from './services/workers.service';
     WorkerComponent,
     WorkersComponent,
     FilterPipe,
+    GraphComponent,
+    InputComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +47,7 @@ import { WorkersService } from './services/workers.service';
     AngularFireDatabaseModule,
     FormsModule,
     MatPaginatorModule,
+    NgChartsModule,
   ],
   providers: [WorkersService]
 })
