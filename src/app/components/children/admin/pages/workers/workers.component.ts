@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { IWorkers } from '../../interfaces/workers.interface';
@@ -28,6 +28,7 @@ export class WorkersComponent implements OnInit {
   public workers!: Observable<IWorkers[]>;
   public visibleWorkers!: Observable<IWorkers[]>;
   public searchText: string = '';
+  public sortText: string = '';
   public pageEvent: PageEvent = new PageEvent();
   public pageIndex: number = 0;
   public pageSize: number = 3;
@@ -47,8 +48,8 @@ export class WorkersComponent implements OnInit {
     this.workers.subscribe((x:IWorkers[]) => this.length = x.length);
 
     this.visibleWorkers = this.workers
-      .pipe(map((x:any) => {
-        return x.filter((el: any, index: number) => index + 1 > event.pageIndex * this.pageSize && index + 1 <= event.pageIndex* this.pageSize + this.pageSize);
+      .pipe(map((x:IWorkers[]) => {
+        return x.filter((el: IWorkers, index: number) => index + 1 > event.pageIndex * this.pageSize && index + 1 <= event.pageIndex* this.pageSize + this.pageSize);
       }));
 
     return event || new PageEvent();

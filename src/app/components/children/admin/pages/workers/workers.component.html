@@ -20,26 +20,26 @@
     </div>
   </div>
   <div class="container-bottom">
-    <div class="sort-field">
+    <div class="sort-field" (click)="sortText = 'name';">
       <p class="field-text">Имя</p>
       <mat-icon svgIcon="sortIco" aria-hidden="false" aria-label="sort by"></mat-icon>
     </div>
-    <div class="sort-field">
+    <div class="sort-field" (click)="sortText = 'position';">
       <p class="field-text">Позиция</p>
       <mat-icon svgIcon="sortIco" aria-hidden="false" aria-label="sort by"></mat-icon>
     </div>
-    <div class="sort-field">
+    <div class="sort-field" (click)="sortText = 'place';">
       <p class="field-text">Офис</p>
       <mat-icon svgIcon="sortIco" aria-hidden="false" aria-label="sort by"></mat-icon>
     </div>
-    <div class="sort-field">
+    <div class="sort-field" (click)="sortText = 'salary';">
       <p class="field-text">Ставка</p>
       <mat-icon svgIcon="sortIco" aria-hidden="false" aria-label="sort by"></mat-icon>
     </div>
   </div>
 </div>
 <div class="content">
-  <div *ngFor="let worker of visibleWorkers | async | appFilter: searchText let x = index" class="user-container" [ngClass]="{
+  <div *ngFor="let worker of visibleWorkers | async | appFilter: searchText | appSort: sortText let x = index" class="user-container" [ngClass]="{
     even: (x % 2 !== 0)
   }" >
     <div class="user-field user-name">

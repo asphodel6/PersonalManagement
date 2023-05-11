@@ -19,6 +19,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { FilterPipe } from './pipes/search.component';
 import { HttpClientModule } from '@angular/common/http';
 import { WorkersService } from './services/workers.service';
+import { SortPipe } from './pipes/sort.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { WorkersService } from './services/workers.service';
     WorkerComponent,
     WorkersComponent,
     FilterPipe,
+    SortPipe
   ],
   imports: [
     CommonModule,
