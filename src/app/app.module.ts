@@ -11,6 +11,7 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AuthService } from './services/auth.service';
 import { DestoryService } from './services/destory.service';
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { DestoryService } from './services/destory.service';
     AppRoutingModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    NgChartsModule
   ],
   providers: [AuthService, DestoryService],
   bootstrap: [AppComponent]
