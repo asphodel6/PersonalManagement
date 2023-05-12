@@ -1,11 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { SalaryAtMoment } from '../../interfaces/worker.interface';
 
 @Component({
   selector: 'worker-salary-graph',
   templateUrl: './graph.component.html',
-  styleUrls: ['graph.component.scss']
+  styleUrls: ['graph.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GraphComponent implements OnInit{
   @Input() public myData!: SalaryAtMoment[];

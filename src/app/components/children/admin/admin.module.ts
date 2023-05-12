@@ -22,6 +22,7 @@ import { WorkersService } from './services/workers.service';
 import { GraphComponent } from './components/graph/graph.component';
 import { NgChartsModule } from 'ng2-charts';
 import { InputComponent } from './components/input/input.component';
+import { IconService } from './services/IconService';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,6 @@ import { InputComponent } from './components/input/input.component';
     MatPaginatorModule,
     NgChartsModule,
   ],
-  providers: [WorkersService]
+  providers: [WorkersService, IconService]
 })
 export class AdminModule { }

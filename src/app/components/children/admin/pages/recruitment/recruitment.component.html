@@ -3,7 +3,7 @@
 
   <div class="container">
     <div class="img-block">
-      <img class="img" src="../../../../../../assets/cloudImg.svg" alt="">
+      <mat-icon class="img" svgIcon="cloud" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
     </div>
     <ng-container *ngFor="let card of cardsOfInputs; trackBy: trackByControlName">
       <input-recruitment [card]="card" [recruitmentForm]="recruitmentForm"/>
