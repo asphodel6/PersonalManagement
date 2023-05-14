@@ -32,9 +32,6 @@ export class WorkersService  {
   public setWorker(form: IRecruitmentForm, worker: IWorker): void {
     const workerDateOfBirth: string = form.dateOfBirth.split('-').reverse().join('.');
     const workerDeviceDate: string = new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'numeric', year: 'numeric' });
-    // this._db.list('employees').push(worker);
-
-    // alert('Workers successfully created');
     worker.name = `${form.name} ${form.surname} ${form.patronymic}`;
     worker.email = form.email;
     worker.phone = form.telephone;
