@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { WorkersService } from '../../services/workers.service';
-import { IWorker } from '../../interfaces/worker.interface';
 import { IconService } from '../../services/IconService';
+import { IWorker } from '../../interfaces/worker.interface';
 
 const cloudIcon: string = `<svg width="91" height="67" viewBox="0 0 91 67" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect width="91" height="67" fill="url(#pattern0)"/>
@@ -40,6 +40,8 @@ export class RecruitmentComponent{
     dateOfBirth: new FormControl('', Validators.required),
     completedEducationalInstitution: new FormControl('', Validators.required),
     education: new FormControl('', Validators.required),
+    place: new FormControl('', Validators.required),
+    currentSalary: new FormControl('', Validators.required)
   });
 
   public readonly cardsOfInputs: Card[] = [
@@ -52,6 +54,8 @@ export class RecruitmentComponent{
     { controlName: 'dateOfBirth', label: 'Дата рождения' },
     { controlName: 'completedEducationalInstitution', label: 'Уч. Учереждение' },
     { controlName: 'education', label: 'Образование' },
+    { controlName: 'place', label: 'Место работы' },
+    { controlName: 'currentSalary', label: 'Зарплата' }
   ];
 
 
@@ -65,6 +69,6 @@ export class RecruitmentComponent{
   }
 
   public submitRecruitment(): void {
-    this._workersService.setWorker(<IWorker>this.recruitmentForm.value);
+    this._workersService.setWorker(this.recruitmentForm.value, <IWorker>{});
   }
 }

@@ -20,6 +20,7 @@ export class WorkerComponent implements OnInit{
     deviceDate: '23.08.2008',
     education: 'Высшее',
     institution: 'Институт радиоэлектроники и информационных технологий - Радиотехнический факультет',
+    place: 'Нет',
     salaryStatistic: [
       { date: '23.08.2008', sum: 345 },
       { date: '23.09.2008', sum: 200 },
