@@ -17,7 +17,6 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { WorkersComponent } from './pages/workers/workers.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FilterPipe } from './pipes/search.component';
-import { HttpClientModule } from '@angular/common/http';
 import { WorkersService } from './services/workers.service';
 import { GraphComponent } from './components/graph/graph.component';
 import { NgChartsModule } from 'ng2-charts';
