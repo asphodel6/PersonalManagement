@@ -11,15 +11,10 @@ export class WorkersService  {
   constructor(private _db: AngularFireDatabase) {}
 
   public calculateAge(birthDateString: string, currentDateString: string): string {
-    const date1: Date = new Date(birthDateString.split('.').reverse().join('-'));
-    const date2: Date = new Date(currentDateString.split('.').reverse().join('-'));
-    const birthDate: Date = new Date(date1);
-    const currentDate: Date = new Date(date2);
-
+    const birthDate: Date = new Date(birthDateString.split('.').reverse().join('-'));
+    const currentDate: Date = new Date(currentDateString.split('.').reverse().join('-'));
     const diff:number = currentDate.getTime() - birthDate.getTime();
-
     const msInYear:number = 1000 * 60 * 60 * 24 * 365.25;
-
     const age:number = Math.floor(diff / msInYear);
 
     return age.toString();
