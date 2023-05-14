@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +12,10 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AuthService } from './services/auth.service';
 import { DestoryService } from './services/destory.service';
 import { NgChartsModule } from 'ng2-charts';
+import { GlobalErrorHandlerService } from './services/global-error-handler.service';
+import { AlertService } from './services/alert.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -27,9 +31,13 @@ import { NgChartsModule } from 'ng2-charts';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    NgChartsModule
+    NgChartsModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule
   ],
-  providers: [AuthService, DestoryService],
+  providers: [AuthService, DestoryService, AlertService,
+    { provide: ErrorHandler, useClass: GlobalErrorHandlerService }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

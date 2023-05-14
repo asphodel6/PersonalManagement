@@ -4,11 +4,12 @@ import { IWorkers } from '../interfaces/workers.interface';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { IWorker } from '../interfaces/worker.interface';
 import { IRecruitmentForm } from '../interfaces/recruitment.form.interface';
+import { AlertService } from '../../../../services/alert.service';
 
 @Injectable()
 export class WorkersService  {
 
-  constructor(private _db: AngularFireDatabase) {}
+  constructor(private _db: AngularFireDatabase, private _alertService: AlertService) {}
 
   public calculateAge(birthDateString: string, currentDateString: string): string {
     const birthDate: Date = new Date(birthDateString.split('.').reverse().join('-'));
@@ -45,6 +46,6 @@ export class WorkersService  {
 
   public pushWorker(worker: IWorker): void {
     this._db.list('employees').push(worker);
-    alert('Worker successfully created');
+    this._alertService.showAlert('Worker successfully created');
   }
 }

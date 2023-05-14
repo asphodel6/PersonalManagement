@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -22,6 +22,8 @@ import { GraphComponent } from './components/graph/graph.component';
 import { NgChartsModule } from 'ng2-charts';
 import { InputComponent } from './components/input/input.component';
 import { IconService } from './services/IconService';
+import { GlobalErrorHandlerService } from '../../../services/global-error-handler.service';
+import { AlertService } from '../../../services/alert.service';
 
 @NgModule({
   declarations: [
@@ -47,8 +49,10 @@ import { IconService } from './services/IconService';
     AngularFireDatabaseModule,
     FormsModule,
     MatPaginatorModule,
-    NgChartsModule,
+    NgChartsModule
   ],
-  providers: [WorkersService, IconService]
+  providers: [WorkersService, IconService, AlertService,
+    { provide: ErrorHandler, useClass: GlobalErrorHandlerService }
+  ]
 })
 export class AdminModule { }
