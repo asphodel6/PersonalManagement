@@ -7,7 +7,7 @@ import {
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
+export class AuthGuard implements CanActivate {
 
   constructor(private _router: Router) {
   }
@@ -20,13 +20,13 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
     return this._router.parseUrl('login');
   }
 
-  public canDeactivate(): any{
-    if (confirm('Are you sure?')) {
-      localStorage.removeItem('token');
-
-      return true;
-    }
-
-    return false;
-  }
+  // public canDeactivate(): any{
+  //   if (confirm('Are you sure?')) {
+  //     localStorage.removeItem('token');
+  //
+  //     return true;
+  //   }
+  //
+  //   return false;
+  // }
 }

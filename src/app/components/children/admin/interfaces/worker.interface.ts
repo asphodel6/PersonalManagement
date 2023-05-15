@@ -9,7 +9,8 @@ export interface IWorker {
   deviceDate: string,
   education: string,
   institution: string,
-  place: string
+  place: string,
+  key: string
 
   salaryStatistic: SalaryAtMoment[] ;
   eventHistory: string[],

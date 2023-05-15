@@ -1,10 +1,11 @@
-import {Component, OnInit, NgZone, ChangeDetectionStrategy} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { IWorkers } from '../../interfaces/workers.interface';
 import { PageEvent } from '@angular/material/paginator';
 import { WorkersService } from '../../services/workers.service';
 import { Observable, map } from 'rxjs';
+import { Router } from '@angular/router';
 const sortIcon: string =
   `
 <svg width="13" height="26" viewBox="0 0 13 26" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -36,6 +37,7 @@ export class WorkersComponent implements OnInit {
   constructor(
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
+    private _router: Router,
     public workersServive: WorkersService
   ) {
     iconRegistry.addSvgIconLiteral(
@@ -59,5 +61,9 @@ export class WorkersComponent implements OnInit {
     initPage.pageIndex = 0;
     this.workers = this.workersServive.getWorkers();
     this.getServerData(initPage);
+  }
+
+  public getMore(key: string): void {
+    this._router.navigate([`admin/workers/${key}`]);
   }
 }
