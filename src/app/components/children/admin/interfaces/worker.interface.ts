@@ -3,18 +3,19 @@ export interface IWorker {
   profession: string,
   age: string,
   currentSalary: string,
-  additionalInformation: CardInformation[];
+  email: string,
+  phone: string,
+  dateOfBirth: string,
+  deviceDate: string,
+  education: string,
+  institution: string,
+  place: string
+
   salaryStatistic: SalaryAtMoment[] ;
   eventHistory: string[],
 }
 
-
-type CardInformation = {
-  label: string,
-  value: string,
-}
-
-type SalaryAtMoment = {
+export type SalaryAtMoment = {
   date: string,
   sum: number,
 }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -17,8 +17,13 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { WorkersComponent } from './pages/workers/workers.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FilterPipe } from './pipes/search.component';
-import { HttpClientModule } from '@angular/common/http';
 import { WorkersService } from './services/workers.service';
+import { GraphComponent } from './components/graph/graph.component';
+import { NgChartsModule } from 'ng2-charts';
+import { InputComponent } from './components/input/input.component';
+import { IconService } from './services/IconService';
+import { GlobalErrorHandlerService } from '../../../services/global-error-handler.service';
+import { AlertService } from '../../../services/alert.service';
 import { SortPipe } from './pipes/sort.component';
 
 @NgModule({
@@ -30,6 +35,8 @@ import { SortPipe } from './pipes/sort.component';
     WorkerComponent,
     WorkersComponent,
     FilterPipe,
+    GraphComponent,
+    InputComponent,
     SortPipe
   ],
   imports: [
@@ -44,7 +51,10 @@ import { SortPipe } from './pipes/sort.component';
     AngularFireDatabaseModule,
     FormsModule,
     MatPaginatorModule,
+    NgChartsModule
   ],
-  providers: [WorkersService]
+  providers: [WorkersService, IconService, AlertService,
+    { provide: ErrorHandler, useClass: GlobalErrorHandlerService }
+  ]
 })
 export class AdminModule { }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { IconOptions, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -61,7 +61,8 @@ const iconOption: IconOptions = {
 @Component({
   selector: 'admin-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss', '../button/button.component.scss']
+  styleUrls: ['./sidebar.component.scss', '../button/button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarComponent {
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
