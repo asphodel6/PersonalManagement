@@ -70,5 +70,6 @@ export class RecruitmentComponent{
 
   public submitRecruitment(): void {
     this._workersService.setWorker(this.recruitmentForm.value, <IWorker>{});
+    this.recruitmentForm.reset();
   }
 }
