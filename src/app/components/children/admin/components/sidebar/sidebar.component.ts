@@ -61,7 +61,7 @@ const iconOption: IconOptions = {
 @Component({
   selector: 'admin-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  styleUrls: ['./sidebar.component.scss', '../button/button.component.scss']
 })
 export class SidebarComponent {
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
