@@ -11,7 +11,7 @@ export class WorkerService {
   }
 
   public getWorkerFromDB(key: string): Observable<IWorker> {
-    return this._db.object(`employees/${key}`).valueChanges().pipe(
+    return this._db.object<IWorker | null>(`employees/${key}`).valueChanges().pipe(
       map((data: unknown) => data as IWorker)
     );
   }
