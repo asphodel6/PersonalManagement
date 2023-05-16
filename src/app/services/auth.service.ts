@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { IUser } from '../interfaces/login.user.interface';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { from, takeUntil } from 'rxjs';
-import { DestoryService } from './destory.service';
+import { from, take } from 'rxjs';
 import { AlertService } from './alert.service';
 
 
@@ -11,13 +10,13 @@ import { AlertService } from './alert.service';
 
 export class AuthService{
 
-  constructor(private _router: Router, private _fireAuth: AngularFireAuth, private _destory$: DestoryService, private _alertService: AlertService) {
+  constructor(private _router: Router, private _fireAuth: AngularFireAuth, private _alertService: AlertService) {
 
   }
 
   public login(user: IUser): void {
     from(this._fireAuth.signInWithEmailAndPassword(user.email, user.password)).pipe(
-      takeUntil(this._destory$)
+      take(1)
     ).subscribe(() => {
       localStorage.setItem('token', 'true');
       this._router.navigate(['admin']);
@@ -27,7 +26,7 @@ export class AuthService{
 
   public singUp(user: IUser): void {
     from(this._fireAuth.createUserWithEmailAndPassword(user.email, user.password)).pipe(
-      takeUntil(this._destory$)
+      take(1)
     ).subscribe(() => {
       this._router.navigate(['login']);
       this._alertService.showAlert('You have successfully registered');

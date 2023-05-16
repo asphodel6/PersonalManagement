@@ -10,7 +10,6 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AuthService } from './services/auth.service';
-import { DestoryService } from './services/destory.service';
 import { NgChartsModule } from 'ng2-charts';
 import { GlobalErrorHandlerService } from './services/global-error-handler.service';
 import { AlertService } from './services/alert.service';
@@ -35,7 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatSnackBarModule,
     BrowserAnimationsModule
   ],
-  providers: [AuthService, DestoryService, AlertService,
+  providers: [AuthService, AlertService,
     { provide: ErrorHandler, useClass: GlobalErrorHandlerService }
   ],
   bootstrap: [AppComponent]

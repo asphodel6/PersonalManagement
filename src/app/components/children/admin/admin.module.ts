@@ -25,7 +25,6 @@ import { IconService } from './services/IconService';
 import { GlobalErrorHandlerService } from '../../../services/global-error-handler.service';
 import { AlertService } from '../../../services/alert.service';
 import { WorkerService } from './services/worker.service';
-import { DestoryService } from '../../../services/destory.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +52,7 @@ import { DestoryService } from '../../../services/destory.service';
     MatPaginatorModule,
     NgChartsModule
   ],
-  providers: [WorkersService, IconService, AlertService, WorkerService, DestoryService,
+  providers: [WorkersService, IconService, AlertService, WorkerService,
     { provide: ErrorHandler, useClass: GlobalErrorHandlerService }
   ]
 })

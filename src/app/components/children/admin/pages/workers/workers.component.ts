@@ -4,8 +4,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { IWorkers } from '../../interfaces/workers.interface';
 import { PageEvent } from '@angular/material/paginator';
 import { WorkersService } from '../../services/workers.service';
-import { Observable, map } from 'rxjs';
+import { Observable, map, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
+import { DestroyService } from '../../../../../services/destroy.service';
 const sortIcon: string =
   `
 <svg width="13" height="26" viewBox="0 0 13 26" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -24,7 +25,8 @@ const sortIcon: string =
   selector: 'admin-workers',
   templateUrl: './workers.component.html',
   styleUrls: ['./workers.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService]
 })
 export class WorkersComponent implements OnInit {
   public workers!: Observable<IWorkers[]>;
@@ -35,10 +37,11 @@ export class WorkersComponent implements OnInit {
   public pageSize: number = 3;
   public length: number = 0;
   constructor(
-    iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer,
+    public iconRegistry: MatIconRegistry,
+    public sanitizer: DomSanitizer,
     private _router: Router,
-    public workersServive: WorkersService
+    public workersServive: WorkersService,
+    private _destroy: DestroyService
   ) {
     iconRegistry.addSvgIconLiteral(
       'sortIco',
@@ -47,7 +50,9 @@ export class WorkersComponent implements OnInit {
   }
 
   public getServerData(event: PageEvent): PageEvent {
-    this.workers.subscribe((x:IWorkers[]) => this.length = x.length);
+    this.workers.pipe(
+      takeUntil(this._destroy)
+    ).subscribe((x:IWorkers[]) => this.length = x.length);
 
     this.visibleWorkers = this.workers
       .pipe(map((x:any) => {
@@ -63,7 +68,7 @@ export class WorkersComponent implements OnInit {
     this.getServerData(initPage);
   }
 
-  public getMore(key: string): void {
-    this._router.navigate([`admin/workers/${key}`]);
+  public more(key: string): void {
+    this._router.navigate(['admin/workers', key]);
   }
 }

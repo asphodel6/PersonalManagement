@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  CanActivate, CanDeactivate,
+  CanActivate,
   Router, UrlTree,
 } from '@angular/router';
 
@@ -19,14 +19,4 @@ export class AuthGuard implements CanActivate {
 
     return this._router.parseUrl('login');
   }
-
-  // public canDeactivate(): any{
-  //   if (confirm('Are you sure?')) {
-  //     localStorage.removeItem('token');
-  //
-  //     return true;
-  //   }
-  //
-  //   return false;
-  // }
 }
