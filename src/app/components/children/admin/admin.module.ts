@@ -24,6 +24,7 @@ import { InputComponent } from './components/input/input.component';
 import { IconService } from './services/IconService';
 import { GlobalErrorHandlerService } from '../../../services/global-error-handler.service';
 import { AlertService } from '../../../services/alert.service';
+import { WorkerService } from './services/worker.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import { AlertService } from '../../../services/alert.service';
     MatPaginatorModule,
     NgChartsModule
   ],
-  providers: [WorkersService, IconService, AlertService,
+  providers: [WorkersService, IconService, AlertService, WorkerService,
     { provide: ErrorHandler, useClass: GlobalErrorHandlerService }
   ]
 })

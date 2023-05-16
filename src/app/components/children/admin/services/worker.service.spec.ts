@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DestroyService } from './destroy.service';
+import { WorkerService } from './worker.service';
 
-describe('DestoryService', () => {
-  let service: DestroyService;
+describe('WorkerService', () => {
+  let service: WorkerService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DestroyService);
+    service = TestBed.inject(WorkerService);
   });
 
   it('should be created', () => {
