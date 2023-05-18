@@ -1,8 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 import { IWorkers } from '../../interfaces/workers.interface';
 import { PageEvent } from '@angular/material/paginator';
 import { WorkersService } from '../../services/workers.service';
-import { Observable, Subscription, map } from 'rxjs';
+import { Observable, Subscription, map, takeUntil } from 'rxjs';
+import { Router } from '@angular/router';
+import { DestroyService } from '../../../../../services/destroy.service';
 import { SortBy } from '../../pipes/sort.component';
 
 
@@ -11,6 +15,7 @@ import { SortBy } from '../../pipes/sort.component';
   templateUrl: './workers.component.html',
   styleUrls: ['./workers.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService],
 })
 export class WorkersComponent implements OnInit, OnDestroy {
   public workers!: Observable<IWorkers[]>;
@@ -21,20 +26,28 @@ export class WorkersComponent implements OnInit, OnDestroy {
   public pageIndex: number = 0;
   public pageSize: number = 3;
   public length: number = 0;
-  private _sub?: Subscription;
-  constructor(public workersServive: WorkersService) {}
+  constructor(
+    public iconRegistry: MatIconRegistry,
+    public sanitizer: DomSanitizer,
+    private _router: Router,
+    public workersServive: WorkersService,
+    private _destroy: DestroyService
+  ) {
+    iconRegistry.addSvgIconLiteral(
+      'sortIco',
+      sanitizer.bypassSecurityTrustHtml(sortIcon)
+    );
+  }
 
   public getServerData(event: PageEvent): PageEvent {
-    this._sub = this.workers.subscribe((worker: IWorkers[]) => (this.length = worker.length));
-    this.visibleWorkers = this.workers.pipe(
-      map((worker: IWorkers[]) => {
-        return worker.filter(
-          (el: IWorkers, index: number) =>
-            index + 1 > event.pageIndex * this.pageSize &&
-            index + 1 <= event.pageIndex * this.pageSize + this.pageSize
-        );
-      })
-    );
+    this.workers.pipe(
+      takeUntil(this._destroy)
+    ).subscribe((x:IWorkers[]) => this.length = x.length);
+
+    this.visibleWorkers = this.workers
+      .pipe(map((x:any) => {
+        return x.filter((el: any, index: number) => index + 1 > event.pageIndex * this.pageSize && index + 1 <= event.pageIndex* this.pageSize + this.pageSize);
+      }));
 
     return event || new PageEvent();
   }
@@ -59,8 +72,7 @@ export class WorkersComponent implements OnInit, OnDestroy {
     this.getServerData(initPage);
   }
 
-  public ngOnDestroy(): void {
-    this._sub?.unsubscribe();
-    
+  public more(key: string): void {
+    this._router.navigate(['admin/workers', key]);
   }
 }

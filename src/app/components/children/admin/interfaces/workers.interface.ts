@@ -3,4 +3,5 @@ export interface IWorkers {
   readonly profession: string,
   readonly place: string,
   readonly currentSalary: number,
+  readonly key: string
 }
