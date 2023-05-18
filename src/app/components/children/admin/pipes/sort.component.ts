@@ -17,25 +17,23 @@ export class SortPipe implements PipeTransform {
    * @param sortBy search string
    * @returns list of elements filtered by search text or []
    */
-  public transform(items: IWorkers[] | null, sortBy: string): IWorkers[] {
+  public transform(items: IWorkers[] | null, sortBy: SortBy): IWorkers[] {
     if (!items) {
       return [];
     }
-    if (!sortBy) {
-      return items;
-    }
 
     return items.sort((a: IWorkers, b: IWorkers) => {
-      if(sortBy === 'name'){
+      
+      if(sortBy === SortBy.name){
         return a.name.localeCompare(b.name);
       }
-      if(sortBy === 'position'){
+      if(sortBy === SortBy.position){
         return a.profession.localeCompare(b.profession);
       }
-      if(sortBy === 'place'){
+      if(sortBy === SortBy.place){
         return a.place.localeCompare(b.place);
       }
-      if(sortBy === 'salary'){
+      if(sortBy === SortBy.salary){
         return b.currentSalary - a.currentSalary;
       }
 

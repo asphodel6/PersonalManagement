@@ -1,8 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { IWorkers } from '../../interfaces/workers.interface';
 import { PageEvent } from '@angular/material/paginator';
 import { WorkersService } from '../../services/workers.service';
-import { Observable, map } from 'rxjs';
+import { Observable, Subscription, map } from 'rxjs';
+import { SortBy } from '../../pipes/sort.component';
 
 
 @Component({
@@ -11,23 +12,23 @@ import { Observable, map } from 'rxjs';
   styleUrls: ['./workers.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WorkersComponent implements OnInit {
+export class WorkersComponent implements OnInit, OnDestroy {
   public workers!: Observable<IWorkers[]>;
   public visibleWorkers!: Observable<IWorkers[]>;
   public searchText: string = '';
-  public sortText: string = '';
+  public sortText: SortBy = SortBy.name;
   public pageEvent: PageEvent = new PageEvent();
   public pageIndex: number = 0;
   public pageSize: number = 3;
   public length: number = 0;
+  private _sub?: Subscription;
   constructor(public workersServive: WorkersService) {}
 
   public getServerData(event: PageEvent): PageEvent {
-    this.workers.subscribe((x: IWorkers[]) => (this.length = x.length));
-
+    this._sub = this.workers.subscribe((worker: IWorkers[]) => (this.length = worker.length));
     this.visibleWorkers = this.workers.pipe(
-      map((x: IWorkers[]) => {
-        return x.filter(
+      map((worker: IWorkers[]) => {
+        return worker.filter(
           (el: IWorkers, index: number) =>
             index + 1 > event.pageIndex * this.pageSize &&
             index + 1 <= event.pageIndex * this.pageSize + this.pageSize
@@ -37,10 +38,29 @@ export class WorkersComponent implements OnInit {
 
     return event || new PageEvent();
   }
+
+  public sortByName = (): void => {
+    this.sortText = SortBy.name;
+  };
+  public sortByPosition = (): void => {
+    this.sortText = SortBy.position;
+  };
+  public sortByPlace = (): void => {
+    this.sortText = SortBy.place;
+  };
+  public sortBySalary = (): void => {
+    this.sortText = SortBy.salary;
+  };
+
   public ngOnInit(): void {
     const initPage: PageEvent = new PageEvent();
     initPage.pageIndex = 0;
     this.workers = this.workersServive.getWorkers();
     this.getServerData(initPage);
+  }
+
+  public ngOnDestroy(): void {
+    this._sub?.unsubscribe();
+    
   }
 }
