@@ -4,7 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { IWorkers } from '../../interfaces/workers.interface';
 import { PageEvent } from '@angular/material/paginator';
 import { WorkersService } from '../../services/workers.service';
-import { Observable, Subscription, map, takeUntil } from 'rxjs';
+import { Observable, map, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
 import { DestroyService } from '../../../../../services/destroy.service';
 import { SortBy } from '../../pipes/sort.component';
@@ -17,7 +17,7 @@ import { SortBy } from '../../pipes/sort.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DestroyService],
 })
-export class WorkersComponent implements OnInit, OnDestroy {
+export class WorkersComponent implements OnInit {
   public workers!: Observable<IWorkers[]>;
   public visibleWorkers!: Observable<IWorkers[]>;
   public searchText: string = '';
@@ -33,10 +33,6 @@ export class WorkersComponent implements OnInit, OnDestroy {
     public workersServive: WorkersService,
     private _destroy: DestroyService
   ) {
-    iconRegistry.addSvgIconLiteral(
-      'sortIco',
-      sanitizer.bypassSecurityTrustHtml(sortIcon)
-    );
   }
 
   public getServerData(event: PageEvent): PageEvent {
