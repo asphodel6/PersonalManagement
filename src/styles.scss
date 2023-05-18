@@ -11,8 +11,19 @@ $color-green: #58B98A;
 body {
   margin: 0;
 }
-
+html, body {
+  height: 100%;
+} 
 .snack-bar {
   --mdc-snackbar-container-color: #1C1C1E;
   --mat-mdc-snack-bar-button-color: #58B98A;
+}
+app-root {
+  display: block;
+  height: 100%;
+}
+app-admin {
+  display: block;
+
+  height: 100%;
 }
