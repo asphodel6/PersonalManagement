@@ -25,6 +25,7 @@ import { IconService } from './services/IconService';
 import { GlobalErrorHandlerService } from '../../../services/global-error-handler.service';
 import { AlertService } from '../../../services/alert.service';
 import { WorkerService } from './services/worker.service';
+import { SortPipe } from './pipes/sort.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { WorkerService } from './services/worker.service';
     FilterPipe,
     GraphComponent,
     InputComponent,
+    SortPipe
   ],
   imports: [
     CommonModule,

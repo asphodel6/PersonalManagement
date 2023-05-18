@@ -35,10 +35,18 @@ a:active {
   line-height: 48px;
   display: flex;
   margin: 1px 0;
+  padding-left: 10px;
+  cursor: pointer;
+}
+.sidebar-link-text {
+  margin-left: 10px;
 }
 .sidebar-link:hover {
-  background-color: #535353; /* Green */
+  background-color: #535353;
 }
 .sidebar-link svg {
   margin: 0 15px;
+}
+.active {
+  background-color: #5f5f5f;
 }

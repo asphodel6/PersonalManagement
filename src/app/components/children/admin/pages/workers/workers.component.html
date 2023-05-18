@@ -20,26 +20,26 @@
     </div>
   </div>
   <div class="container-bottom">
-    <div class="sort-field">
+    <div class="sort-field" (click)="sortByName()">
       <p class="field-text">Имя</p>
-      <mat-icon svgIcon="sortIco" aria-hidden="false" aria-label="sort by"></mat-icon>
+      <mat-icon>sort</mat-icon>
     </div>
-    <div class="sort-field">
+    <div class="sort-field" (click)="sortByPosition()">
       <p class="field-text">Позиция</p>
-      <mat-icon svgIcon="sortIco" aria-hidden="false" aria-label="sort by"></mat-icon>
+      <mat-icon>sort</mat-icon>
     </div>
-    <div class="sort-field">
+    <div class="sort-field" (click)="sortByPlace()">
       <p class="field-text">Офис</p>
-      <mat-icon svgIcon="sortIco" aria-hidden="false" aria-label="sort by"></mat-icon>
+      <mat-icon>sort</mat-icon>
     </div>
-    <div class="sort-field">
+    <div class="sort-field" (click)="sortBySalary()">
       <p class="field-text">Ставка</p>
-      <mat-icon svgIcon="sortIco" aria-hidden="false" aria-label="sort by"></mat-icon>
+      <mat-icon>sort</mat-icon>
     </div>
   </div>
 </div>
 <div class="content">
-  <div *ngFor="let worker of visibleWorkers | async | appFilter: searchText let x = index" class="user-container" [ngClass]="{
+  <div *ngFor="let worker of visibleWorkers | async | appFilter: searchText | appSort: sortText let x = index" class="user-container" [ngClass]="{
     even: (x % 2 !== 0)
   }" >
     <div class="user-field user-name">
@@ -54,6 +54,6 @@
     <div class="user-field">
       {{worker.currentSalary | currency}}
     </div>
-    <button (click)="more(worker.key)">Подробнее</button>
+    <button class="about-btn" (click)="more(worker.key)">Подробнее</button>
   </div>
 </div>
