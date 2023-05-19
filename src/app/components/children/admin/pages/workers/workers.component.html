@@ -20,26 +20,26 @@
     </div>
   </div>
   <div class="container-bottom">
-    <div class="sort-field" (click)="sortByName()">
+    <div class="sort-field" [ngClass]="{ activeSort: compareSortBy(1, true), activeSortML: compareSortBy(1, false) }" (click)="sortByName();">
       <p class="field-text">Имя</p>
       <mat-icon>sort</mat-icon>
     </div>
-    <div class="sort-field" (click)="sortByPosition()">
+    <div class="sort-field" [ngClass]="{ activeSort: compareSortBy(2, true), activeSortML: compareSortBy(2, false)}" (click)="sortByPosition()">
       <p class="field-text">Позиция</p>
       <mat-icon>sort</mat-icon>
     </div>
-    <div class="sort-field" (click)="sortByPlace()">
+    <div class="sort-field" [ngClass]="{ activeSort: compareSortBy(3, true), activeSortML: compareSortBy(3, false)}" (click)="sortByPlace()">
       <p class="field-text">Офис</p>
       <mat-icon>sort</mat-icon>
     </div>
-    <div class="sort-field" (click)="sortBySalary()">
+    <div class="sort-field" [ngClass]="{ activeSort: compareSortBy(4, true), activeSortML: compareSortBy(4, false)}" (click)="sortBySalary()">
       <p class="field-text">Ставка</p>
       <mat-icon>sort</mat-icon>
     </div>
   </div>
 </div>
 <div class="content">
-  <div *ngFor="let worker of visibleWorkers | async | appFilter: searchText | appSort: sortText let x = index" class="user-container" [ngClass]="{
+  <div *ngFor="let worker of visibleWorkers | async | appFilter: searchText | appSort: sortBy let x = index" class="user-container" [ngClass]="{
     even: (x % 2 !== 0)
   }" >
     <div class="user-field user-name">

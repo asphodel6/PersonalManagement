@@ -2,10 +2,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { IWorkers } from '../interfaces/workers.interface';
 
 export enum SortBy {
-  name,
-  position,
-  place,
-  salary
+  noSort = 0,
+  name = 1,
+  position = 2,
+  place = 3,
+  salary = 4
 }
 
 @Pipe({ name: 'appSort' })
@@ -24,17 +25,17 @@ export class SortPipe implements PipeTransform {
 
     return items.sort((a: IWorkers, b: IWorkers) => {
       
-      if(sortBy === SortBy.name){
-        return a.name.localeCompare(b.name);
+      if(sortBy === SortBy.name || sortBy === -SortBy.name){
+        return sortBy === SortBy.name ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
       }
-      if(sortBy === SortBy.position){
-        return a.profession.localeCompare(b.profession);
+      if(sortBy === SortBy.position || sortBy === -SortBy.position){
+        return sortBy === SortBy.position ? a.profession.localeCompare(b.profession) : b.profession.localeCompare(a.profession);
       }
-      if(sortBy === SortBy.place){
-        return a.place.localeCompare(b.place);
+      if(sortBy === SortBy.place || sortBy === -SortBy.place){
+        return sortBy === SortBy.place ? a.place.localeCompare(b.place) : b.place.localeCompare(a.place);
       }
-      if(sortBy === SortBy.salary){
-        return b.currentSalary - a.currentSalary;
+      if(sortBy === SortBy.salary || sortBy === -SortBy.salary){
+        return sortBy === SortBy.salary ? b.currentSalary - a.currentSalary : a.currentSalary - b.currentSalary;
       }
 
       return 0;

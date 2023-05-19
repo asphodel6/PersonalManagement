@@ -21,10 +21,10 @@ export class WorkersComponent implements OnInit {
   public workers!: Observable<IWorkers[]>;
   public visibleWorkers!: Observable<IWorkers[]>;
   public searchText: string = '';
-  public sortText: SortBy = SortBy.name;
+  public sortBy: SortBy = SortBy.noSort;
   public pageEvent: PageEvent = new PageEvent();
   public pageIndex: number = 0;
-  public pageSize: number = 3;
+  public pageSize: number = 10;
   public length: number = 0;
   constructor(
     public iconRegistry: MatIconRegistry,
@@ -35,30 +35,34 @@ export class WorkersComponent implements OnInit {
   ) {
   }
 
+  public compareSortBy = (val: SortBy, abs: boolean): boolean => {
+    return abs ? val === Math.abs(this.sortBy) : val === this.sortBy;
+  };
+
   public getServerData(event: PageEvent): PageEvent {
     this.workers.pipe(
       takeUntil(this._destroy)
     ).subscribe((x:IWorkers[]) => this.length = x.length);
 
     this.visibleWorkers = this.workers
-      .pipe(map((x:any) => {
-        return x.filter((el: any, index: number) => index + 1 > event.pageIndex * this.pageSize && index + 1 <= event.pageIndex* this.pageSize + this.pageSize);
+      .pipe(map((workers: IWorkers[]) => {
+        return workers.filter((el: IWorkers, index: number) => index + 1 > event.pageIndex * this.pageSize && index + 1 <= event.pageIndex* this.pageSize + this.pageSize);
       }));
 
     return event || new PageEvent();
   }
 
   public sortByName = (): void => {
-    this.sortText = SortBy.name;
+    this.sortBy = this.sortBy === SortBy.name ? -SortBy.name : SortBy.name;
   };
   public sortByPosition = (): void => {
-    this.sortText = SortBy.position;
+    this.sortBy = this.sortBy === SortBy.position ? -SortBy.position : SortBy.position;
   };
   public sortByPlace = (): void => {
-    this.sortText = SortBy.place;
+    this.sortBy = this.sortBy === SortBy.place ? -SortBy.place : SortBy.place;
   };
   public sortBySalary = (): void => {
-    this.sortText = SortBy.salary;
+    this.sortBy = this.sortBy === SortBy.salary ? -SortBy.salary : SortBy.salary;
   };
 
   public ngOnInit(): void {

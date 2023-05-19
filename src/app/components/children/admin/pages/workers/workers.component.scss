@@ -1,13 +1,13 @@
 @import '../../../../../../styles';
 
 .header {
-  background-color: $color-green;
   width: 100%;
-  padding-right: 100px;
+  background-color: $color-green;
+
 }
 .search{
   width: 500px;
-  padding: 15px;
+  padding: 10px 0 0 10px;
 }
 
 .container-top{
@@ -17,13 +17,16 @@
 }
 
 .paginator{
-  padding: 15px;
   background-color: $color-green;
+  padding: 10px 10px 0 0;
 }
 .container-bottom{
+
   width: 100%;
   display: flex;
   justify-content: space-around;
+  padding-right: 100px;
+  border-top: 2px solid $color-secondary;
 }
 .sort-field{
   font-family: 'Roboto';
@@ -36,6 +39,8 @@
   width: 25%;
   padding: 0 30px 0 10px;
   cursor: pointer;
+  user-select: none;
+  padding-top: 10px;
 }
 .field-text {
   margin-right: auto;
@@ -51,7 +56,7 @@
   min-height: 60px;
   align-items: center;
   background-color: $color-primary;
-  padding: 0 15px;
+  padding: 0 5px;
 }
 .user-field {
   width: 25%;
@@ -94,4 +99,19 @@
           
   .about-btn:hover {
   background-color: rgb( 75, 183, 141 );
+  }
+
+  .activeSort {
+    background-color: #44926c;
+    transition: 0.4s;
+    mat-icon {
+      transition: 0.3s;
+      transform: rotate(180deg);
+    }
+  }
+  .activeSortML {
+    mat-icon {
+      transition: 0.3s;
+      transform: rotate(0deg);
+    }
   }
