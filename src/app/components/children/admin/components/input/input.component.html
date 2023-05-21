@@ -1,20 +1,19 @@
-<ng-container [ngSwitch]="card.controlName">
-  <div *ngSwitchCase=" 'dateOfBirth' " class="cardOfInput" [formGroup]='recruitmentForm'>
+<div class="cardOfInput" [formGroup]='recruitmentForm'>
+  <div class="labelWithValid">
     <div class="label-input">{{ card.label }}</div>
-
-    <div class="invalid" *ngIf="validationElementMethod(card.controlName)">{{card.controlName}} is wrong</div>
-    <input class="input" type="date" [formControlName]="card.controlName">
+    <div class="invalid" *ngIf="validationElementMethod(card.controlName)">
+      <div class="invalidMessenger" *ngIf="validationElementMethodRequired(card.controlName)">
+        Это поле обязательно
+      </div>
+      <div class="invalidMessenger" *ngIf="validationElementMethodPattern(card.controlName)">
+        Ваш ввод невалиден
+      </div>
+      <div class="invalidMessenger" *ngIf="validationElementMethodEmail(card.controlName)">
+        Почта некорректна
+      </div>
+    </div>
   </div>
+  <input #input (blur)="onInputChange()" class="input" [type]="card.type" [formControlName]="card.controlName">
+</div>
 
-  <div *ngSwitchCase=" 'telephone' " class="cardOfInput" [formGroup]='recruitmentForm'>
-    <div class="label-input">{{ card.label }}</div>
-    <div class="invalid" *ngIf="validationElementMethod(card.controlName)">{{card.controlName}} is wrong</div>
-    <input class="input" type="tel" [formControlName]="card.controlName">
-  </div>
 
-  <div *ngSwitchDefault class="cardOfInput" [formGroup]='recruitmentForm'>
-    <div class="label-input">{{ card.label }}</div>
-    <div class="invalid" *ngIf="validationElementMethod(card.controlName)">{{card.controlName}} is wrong</div>
-    <input class="input" type="text" [formControlName]="card.controlName">
-  </div>
-</ng-container>

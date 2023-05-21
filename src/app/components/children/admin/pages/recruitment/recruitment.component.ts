@@ -18,6 +18,7 @@ const cloudIcon: string = `<svg width="91" height="67" viewBox="0 0 91 67" fill=
 export type Card = {
   controlName: string,
   label: string,
+  type: 'text' | 'tel' | 'date' | 'email',
 }
 
 @Component({
@@ -28,34 +29,34 @@ export type Card = {
 })
 export class RecruitmentComponent{
 
-  public readonly patternForValidationName: string = '^(?=.*[а-яА-яA-Za-z])[а-яА-яA-Za-z]{2,}$';
+  public readonly patternForValidationName: RegExp = /^(?=.*[а-яА-яA-Za-z])[а-яА-яA-Za-z]{2,}$/;
 
   public recruitmentForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.pattern(this.patternForValidationName),Validators.maxLength(15)]),
     surname: new FormControl('', [Validators.required, Validators.pattern(this.patternForValidationName),Validators.maxLength(20)]),
-    patronymic: new FormControl('', [Validators.required, Validators.pattern(this.patternForValidationName),Validators.maxLength(15)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    telephone: new FormControl('', [Validators.required, Validators.pattern(/^\+7\d{10}$/)]),
+    patronymic: new FormControl('', [Validators.pattern(this.patternForValidationName),Validators.maxLength(15)]),
+    email: new FormControl('', [Validators.email]),
+    telephone: new FormControl('', [Validators.pattern(/^\+7\d{10}$/)]),
     position: new FormControl('', Validators.required),
     dateOfBirth: new FormControl('', Validators.required),
-    completedEducationalInstitution: new FormControl('', Validators.required),
-    education: new FormControl('', Validators.required),
+    completedEducationalInstitution: new FormControl(''),
+    education: new FormControl(''),
     place: new FormControl('', Validators.required),
-    currentSalary: new FormControl('', Validators.required)
+    currentSalary: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)])
   });
 
   public readonly cardsOfInputs: Card[] = [
-    { controlName: 'name', label: 'Имя' },
-    { controlName: 'surname', label: 'Фамилия' },
-    { controlName: 'patronymic', label: 'Отчество' },
-    { controlName: 'email', label: 'Email' },
-    { controlName: 'telephone', label: 'Телефон' },
-    { controlName: 'position', label: 'Позиция' },
-    { controlName: 'dateOfBirth', label: 'Дата рождения' },
-    { controlName: 'completedEducationalInstitution', label: 'Уч. Учереждение' },
-    { controlName: 'education', label: 'Образование' },
-    { controlName: 'place', label: 'Место работы' },
-    { controlName: 'currentSalary', label: 'Зарплата' }
+    { controlName: 'name', label: 'Имя*', type: 'text' },
+    { controlName: 'surname', label: 'Фамилия*', type: 'text' },
+    { controlName: 'patronymic', label: 'Отчество', type: 'text' },
+    { controlName: 'email', label: 'Email', type: 'email' },
+    { controlName: 'telephone', label: 'Телефон', type: 'tel' },
+    { controlName: 'position', label: 'Позиция*', type: 'text' },
+    { controlName: 'dateOfBirth', label: 'Дата рождения*', type: 'date' },
+    { controlName: 'completedEducationalInstitution', label: 'Уч. Учереждение', type: 'text' },
+    { controlName: 'education', label: 'Образование', type: 'text' },
+    { controlName: 'place', label: 'Место работы*', type: 'text' },
+    { controlName: 'currentSalary', label: 'Зарплата в долларах*', type: 'text' }
   ];
 
 

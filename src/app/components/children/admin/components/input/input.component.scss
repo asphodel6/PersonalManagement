@@ -5,6 +5,7 @@
 
 .label-input {
   margin-bottom: 5px;
+  margin-right: 15px;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -15,8 +16,18 @@
 
 }
 
+.labelWithValid {
+  display: flex;
+  align-items: center;
+}
+
 .invalid {
   color: red;
+}
+
+.invalidMessenger {
+  margin-bottom: 5px;
+  font-size: 14px;
 }
 
 .input {
