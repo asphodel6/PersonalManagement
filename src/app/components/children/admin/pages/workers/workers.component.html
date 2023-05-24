@@ -20,19 +20,19 @@
     </div>
   </div>
   <div class="container-bottom">
-    <div class="sort-field" [ngClass]="{ activeSort: compareSortBy(1, true), activeSortML: compareSortBy(1, false) }" (click)="sortByName();">
+    <div class="sort-field" [ngClass]="{ 'active-sort': compareSortBy(1, true), 'active-sort-ml': compareSortBy(1, false) }" (click)="sortByName();">
       <p class="field-text">Имя</p>
       <mat-icon>sort</mat-icon>
     </div>
-    <div class="sort-field" [ngClass]="{ activeSort: compareSortBy(2, true), activeSortML: compareSortBy(2, false)}" (click)="sortByPosition()">
+    <div class="sort-field" [ngClass]="{ 'active-sort': compareSortBy(2, true), 'active-sort-ml': compareSortBy(2, false)}" (click)="sortByPosition()">
       <p class="field-text">Позиция</p>
       <mat-icon>sort</mat-icon>
     </div>
-    <div class="sort-field" [ngClass]="{ activeSort: compareSortBy(3, true), activeSortML: compareSortBy(3, false)}" (click)="sortByPlace()">
+    <div class="sort-field" [ngClass]="{ 'active-sort': compareSortBy(3, true), 'active-sort-ml': compareSortBy(3, false)}" (click)="sortByPlace()">
       <p class="field-text">Офис</p>
       <mat-icon>sort</mat-icon>
     </div>
-    <div class="sort-field" [ngClass]="{ activeSort: compareSortBy(4, true), activeSortML: compareSortBy(4, false)}" (click)="sortBySalary()">
+    <div class="sort-field" [ngClass]="{ 'active-sort': compareSortBy(4, true), 'active-sort-ml': compareSortBy(4, false)}" (click)="sortBySalary()">
       <p class="field-text">Ставка</p>
       <mat-icon>sort</mat-icon>
     </div>

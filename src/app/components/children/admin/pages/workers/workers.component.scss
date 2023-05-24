@@ -101,7 +101,7 @@
   background-color: rgb( 75, 183, 141 );
   }
 
-  .activeSort {
+  .active-sort {
     background-color: #44926c;
     transition: 0.4s;
     mat-icon {
@@ -109,7 +109,7 @@
       transform: rotate(180deg);
     }
   }
-  .activeSortML {
+  .active-sort-ml {
     mat-icon {
       transition: 0.3s;
       transform: rotate(0deg);
