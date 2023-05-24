@@ -10,6 +10,8 @@ import { AlertService } from './alert.service';
 
 export class AuthService{
 
+  private _userToken: string = '';
+
   constructor(private _router: Router, private _fireAuth: AngularFireAuth, private _alertService: AlertService) {
 
   }
@@ -17,8 +19,9 @@ export class AuthService{
   public login(user: IUser): void {
     from(this._fireAuth.signInWithEmailAndPassword(user.email, user.password)).pipe(
       take(1)
-    ).subscribe(() => {
-      localStorage.setItem('token', 'true');
+    ).subscribe((token) => {
+      this._userToken = <string>token.user?.refreshToken;
+      sessionStorage.setItem('token', this._userToken);
       this._router.navigate(['admin']);
       this._alertService.showAlert('You have successfully logged in');
     });
@@ -34,9 +37,13 @@ export class AuthService{
   }
 
   public isLoggedIn(): boolean {
-    return localStorage.getItem('token') === 'true';
+    return sessionStorage.getItem('token') === this._userToken;
+  }
+
+  public logout(): void {
+    sessionStorage.removeItem('token');
+    this._router.navigate(['login']);
+    this._alertService.showAlert('You are logged out');
   }
 }
-
-
 

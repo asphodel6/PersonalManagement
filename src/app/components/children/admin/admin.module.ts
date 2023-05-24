@@ -26,6 +26,7 @@ import { GlobalErrorHandlerService } from '../../../services/global-error-handle
 import { AlertService } from '../../../services/alert.service';
 import { WorkerService } from './services/worker.service';
 import { SortPipe } from './pipes/sort.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { SortPipe } from './pipes/sort.component';
     FilterPipe,
     GraphComponent,
     InputComponent,
-    SortPipe
+    SortPipe,
   ],
   imports: [
     CommonModule,
@@ -52,7 +53,8 @@ import { SortPipe } from './pipes/sort.component';
     AngularFireDatabaseModule,
     FormsModule,
     MatPaginatorModule,
-    NgChartsModule
+    NgChartsModule,
+    MatDialogModule
   ],
   providers: [WorkersService, IconService, AlertService, WorkerService,
     { provide: ErrorHandler, useClass: GlobalErrorHandlerService }

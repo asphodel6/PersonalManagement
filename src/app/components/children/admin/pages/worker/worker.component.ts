@@ -1,29 +1,44 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, InjectionToken } from '@angular/core';
 import { IWorker } from '../../interfaces/worker.interface';
 import { ActivatedRoute } from '@angular/router';
 import { WorkerService } from '../../services/worker.service';
-import { DestroyService } from '../../../../../services/destroy.service';
-import { Observable, takeUntil } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../components/dialog/dialog.component';
 
-
+const workerData: InjectionToken<Observable<IWorker>> =  new InjectionToken<Observable<IWorker>>('workerData');
 @Component({
   selector: 'admin-worker',
   templateUrl: './worker.component.html',
   styleUrls: ['./worker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+  providers: [
+    {
+      provide: workerData,
+      useFactory: () => {
+        const route: ActivatedRoute = inject(ActivatedRoute);
+        const service: WorkerService = inject(WorkerService);
+
+
+        return route.paramMap
+          .pipe(
+            map((params) => params.get('key') as string),
+            switchMap(id => service.getWorkerFromDB(id))
+          );
+      }
+    }
+  ]
 })
-export class WorkerComponent{
+export class WorkerComponent {
+  public workerData$: Observable<IWorker> = inject(workerData);
 
-  public workerData$!: Observable<IWorker>;
+  constructor(private _matDialog: MatDialog) {
 
-  constructor(private _route: ActivatedRoute, private _workerService: WorkerService, private _destroy: DestroyService) {
-    this._route.paramMap.pipe(
-      takeUntil(this._destroy)
-    ).subscribe(key => this.setWorker(key.get('key')));
   }
 
-  private setWorker(key: string | null): void {
-    this.workerData$ = this._workerService.getWorkerFromDB(<string>key);
+  public openDialog(id: string): void {
+    this._matDialog.open(DialogComponent, {
+      data: id
+    });
   }
 }

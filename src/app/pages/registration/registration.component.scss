@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: end;
+  height: 100vh;
 }
 
 .title {
@@ -45,8 +46,8 @@
 }
 
 button {
-  background-color: #F71735;
-  color: #F8A81B;
+  background-color: $color-green;
+  color: $color-black;
   font-weight: 600;
   font-size: 20px;
   line-height: 45px;

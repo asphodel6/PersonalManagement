@@ -3,17 +3,19 @@ import {
   CanActivate,
   Router, UrlTree,
 } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private _router: Router) {
+  constructor(private _router: Router, private _authService: AuthService) {
   }
 
   public canActivate(): boolean | UrlTree {
-    if (localStorage.getItem('token') === 'true') {
+    if (this._authService.isLoggedIn()) {
+
       return true;
     }
 
