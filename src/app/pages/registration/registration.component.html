@@ -1,27 +1,27 @@
 <div class="container">
-  <div class="title">Welcome</div>
-  <div class="text description">Create account here</div>
+  <div class="title">Добро пожаловать</div>
+  <div class="text description">Создайте аккаунт</div>
   <form [formGroup]="registrationForm" (ngSubmit)="createUser()">
     <div class="text email-description">Email</div>
     <div><input class="registrationForm" type="email" formControlName="email"></div>
     <div *ngIf="email.invalid && email.touched" class="danger">
-      <div *ngIf="email.errors.required">Email is required</div>
-      <div *ngIf="email.errors?.['email']">Invalid email format</div>
+      <div *ngIf="email.errors.required">Email обязателен</div>
+      <div *ngIf="email.errors?.['email']">Неккоректный формат почты</div>
     </div>
     <div class="text">Password</div>
     <div><input class="registrationForm" type="password" formControlName="password"></div>
     <div *ngIf="password.invalid && password.touched" class="danger">
-      <div *ngIf="password.errors.required">Password is required</div>
-      <div *ngIf="password.errors.pattern">Password must be at least 8 characters long and have numbers</div>
+      <div *ngIf="password.errors.required">Пароль обязателен</div>
+      <div *ngIf="password.errors.pattern">Пароль должен быть длиннее 7 символов и содержать цифры</div>
     </div>
-    <div class="text">Repeat password</div>
+    <div class="text">Повторите пароль</div>
     <div><input class="registrationForm" type="password" formControlName="repeat"></div>
     <div *ngIf="repeat.touched" class="danger">
-      <div *ngIf="password.value !== repeat.value">Passwords must match</div>
+      <div *ngIf="password.value !== repeat.value">Пароли должны совпадать</div>
     </div>
     <div>
-      <button [disabled]="registrationForm.invalid || (password.value !== repeat.value)">Create</button>
+      <button [disabled]="registrationForm.invalid || (password.value !== repeat.value)">Создать</button>
     </div>
-    <div class="text login">Already have account? <span routerLink="/login">Sign up Here</span></div>
+    <div class="text login">Уже есть аккаунт ? <span routerLink="/login">Войдите здесь</span></div>
   </form>
 </div>

@@ -15,7 +15,8 @@
   font-size: 50px;
   line-height: 75px;
   margin-top: 72px;
-  margin-right: 425px;
+  margin-right: 192px;
+
 }
 
 .text {
@@ -24,7 +25,7 @@
 }
 
 .description {
-  margin-right: 454px;
+  margin-right: 482px;
 }
 
 .email-description {
@@ -63,4 +64,5 @@ button {
 
 span {
   font-weight: 600;
+  border-bottom: 2px solid $color-green;
 }

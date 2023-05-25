@@ -25,10 +25,6 @@ export class RegistrationComponent implements OnInit{
       'password': new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)]),
       'repeat': new FormControl('',[Validators.required])
     });
-
-    if (this._authService.isLoggedIn()) {
-      this._router.navigate(['admin']);
-    }
   }
 
   public createUser(): void {

@@ -20,7 +20,7 @@ export class WorkerService {
 
   public deleteWorkerFromDB(id: string): void {
     this._db.object(`employees/${id}`).remove();
-    this._alertService.showAlert('Worker successfully deleted');
+    this._alertService.showAlert('Сотрудник успешно удален');
     this._router.navigate(['admin']);
   }
 }

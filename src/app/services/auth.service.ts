@@ -22,7 +22,7 @@ export class AuthService{
       take(1)
     ).subscribe(() => {
       this._router.navigate(['admin']);
-      this._alertService.showAlert('You have successfully logged in');
+      this._alertService.showAlert('Вы успешно вошли');
     });
   }
 
@@ -31,7 +31,7 @@ export class AuthService{
       take(1)
     ).subscribe(() => {
       this._router.navigate(['login']);
-      this._alertService.showAlert('You have successfully registered');
+      this._alertService.showAlert('Вы успешно зарегестрировались');
     });
   }
 
@@ -40,7 +40,7 @@ export class AuthService{
   }
 
   public logout(): void {
-    this._fireAuth.signOut().then(() => this._alertService.showAlert('You are logged out'));
+    this._fireAuth.signOut().then(() => this._alertService.showAlert('Вы вышли из аккаунта'));
     this._router.navigate(['login']);
   }
 }
