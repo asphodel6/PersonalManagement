@@ -24,10 +24,6 @@ export class LoginComponent implements OnInit{
       'email': new FormControl('', [Validators.required, Validators.email]),
       'password': new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)])
     });
-
-    if (this._authService.isLoggedIn()) {
-      this._router.navigate(['admin']);
-    }
   }
 
   public submitLogin(): void {

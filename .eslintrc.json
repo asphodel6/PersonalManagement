@@ -159,7 +159,7 @@
         "@typescript-eslint/typedef": [
             "error",
             {
-                "arrowParameter": true,
+                "arrowParameter": false,
                 "variableDeclaration": true,
                 "arrayDestructuring": true,
                 "parameter": true,
