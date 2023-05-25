@@ -2,26 +2,25 @@ import { Injectable } from '@angular/core';
 import { IUser } from '../interfaces/login.user.interface';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { from, take } from 'rxjs';
+import { from, Observable, take } from 'rxjs';
 import { AlertService } from './alert.service';
+import firebase from 'firebase/compat';
 
 
 @Injectable()
 
 export class AuthService{
 
-  private _userToken: string = '';
+  private readonly _user!: Observable<firebase.User | null>;
 
   constructor(private _router: Router, private _fireAuth: AngularFireAuth, private _alertService: AlertService) {
-
+    this._user = _fireAuth.authState;
   }
 
   public login(user: IUser): void {
     from(this._fireAuth.signInWithEmailAndPassword(user.email, user.password)).pipe(
       take(1)
-    ).subscribe((token) => {
-      this._userToken = <string>token.user?.refreshToken;
-      sessionStorage.setItem('token', this._userToken);
+    ).subscribe(() => {
       this._router.navigate(['admin']);
       this._alertService.showAlert('You have successfully logged in');
     });
@@ -36,14 +35,13 @@ export class AuthService{
     });
   }
 
-  public isLoggedIn(): boolean {
-    return sessionStorage.getItem('token') === this._userToken;
+  public isLoggedIn(): Observable<firebase.User | null> {
+    return this._user;
   }
 
   public logout(): void {
-    sessionStorage.removeItem('token');
+    this._fireAuth.signOut().then(() => this._alertService.showAlert('You are logged out'));
     this._router.navigate(['login']);
-    this._alertService.showAlert('You are logged out');
   }
 }
 
