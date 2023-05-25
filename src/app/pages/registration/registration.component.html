@@ -8,7 +8,7 @@
       <div *ngIf="email.errors.required">Email обязателен</div>
       <div *ngIf="email.errors?.['email']">Неккоректный формат почты</div>
     </div>
-    <div class="text">Password</div>
+    <div class="text">Пароль</div>
     <div><input class="registrationForm" type="password" formControlName="password"></div>
     <div *ngIf="password.invalid && password.touched" class="danger">
       <div *ngIf="password.errors.required">Пароль обязателен</div>
