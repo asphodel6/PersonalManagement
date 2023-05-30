@@ -15,6 +15,7 @@ import { GlobalErrorHandlerService } from './services/global-error-handler.servi
 import { AlertService } from './services/alert.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogModule } from './modules/dialog/dialog.module';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFireAuthModule,
     NgChartsModule,
     MatSnackBarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DialogModule
   ],
   providers: [AuthService, AlertService,
     { provide: ErrorHandler, useClass: GlobalErrorHandlerService }
