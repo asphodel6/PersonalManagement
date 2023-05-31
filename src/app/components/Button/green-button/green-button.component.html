@@ -1,0 +1,13 @@
+
+<button class="about-btn" 
+  [ngStyle]="{
+    width, 
+    height
+  }" 
+  [ngClass]="{
+    disabled
+  }"
+  (click)="onClickButton($event)"
+  [disabled]="disabled">
+  {{label}}
+</button>

@@ -54,6 +54,6 @@
     <div class="user-field">
       {{worker.currentSalary | currency}}
     </div>
-    <button class="about-btn" (click)="more(worker.key)">Подробнее</button>
+    <app-green-button label="Подробнее" (byClick)="more(worker.key)" />
   </div>
 </div>

@@ -80,38 +80,17 @@
   background-color: $color-secondary
 }
 
-.about-btn{
-  border-radius: 4px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.08);
-  color: #fff;
-  display:block;
-  width:100px;
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  text-decoration: none;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
-  transition: background-color 0.1s linear;
-  height: 35px;
-  background-color: rgb( 43, 153, 91 );
-  border: 1px solid rgb( 33, 126, 74 );
+.active-sort {
+  background-color: #44926c;
+  transition: 0.4s;
+  mat-icon {
+    transition: 0.3s;
+    transform: rotate(180deg);
   }
-
-  .about-btn:hover {
-  background-color: rgb( 75, 183, 141 );
+}
+.active-sort-ml {
+  mat-icon {
+    transition: 0.3s;
+    transform: rotate(0deg);
   }
-
-  .active-sort {
-    background-color: #44926c;
-    transition: 0.4s;
-    mat-icon {
-      transition: 0.3s;
-      transform: rotate(180deg);
-    }
-  }
-  .active-sort-ml {
-    mat-icon {
-      transition: 0.3s;
-      transform: rotate(0deg);
-    }
-  }
+}

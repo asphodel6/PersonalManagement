@@ -27,6 +27,7 @@ import { AlertService } from '../../../services/alert.service';
 import { WorkerService } from './services/worker.service';
 import { SortPipe } from './pipes/sort.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { GreenButtonComponent } from '../../Button/green-button/green-button.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     GraphComponent,
     InputComponent,
     SortPipe,
+    GreenButtonComponent
   ],
   imports: [
     CommonModule,
