@@ -16,6 +16,7 @@ import { AlertService } from './services/alert.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogModule } from './modules/dialog/dialog.module';
+import { ChangeColorOnHoverDirective } from './directives/change-color-on-hover.directive';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { DialogModule } from './modules/dialog/dialog.module';
     LoginComponent,
     RegistrationComponent,
     NotFoundComponent,
+    ChangeColorOnHoverDirective,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,6 @@
 <div class="user-info">
   <img src="../../../../../../assets/Joe-Hughes.jpg">
   <div class="user-info-text">
-    <p class="username">Степанов артем</p>
     <p class="status">{{ "administator"  }}</p>
   </div>
 </div>
@@ -15,33 +14,10 @@
     <admin-nav-button text="Recruitments" path="/admin/recruitment">
       <mat-icon>person_add</mat-icon>
     </admin-nav-button>
-
-    <admin-nav-button text="Analytics" path="/analytics">
-      <mat-icon>graphic_eq</mat-icon>
-    </admin-nav-button>
-
-    <admin-nav-button text="Settings" path="/settings">
-      <mat-icon>settings</mat-icon>
-    </admin-nav-button>
-  </div>
-
-  <div class="sidebar-endbox">
-    <admin-nav-button text="Help center" path="/help">
-      <mat-icon>help</mat-icon>
-    </admin-nav-button>
-
+    <div class="divider"></div>
     <admin-nav-button text="Log out" (click)="logout()">
       <mat-icon>input</mat-icon>
     </admin-nav-button>
-
-    <div class="divider"></div>
-
-      <div class="sidebar-link">
-        <mat-icon>wb_incandescent</mat-icon>
-        <div class="sidebar-link-text">
-          Nightmode
-        </div>
-      </div>
   </div>
 </div>
 
