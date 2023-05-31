@@ -15,6 +15,7 @@ import { GlobalErrorHandlerService } from './services/global-error-handler.servi
 import { AlertService } from './services/alert.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GreenButtonModule } from './components/Button/green-button/green-button.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFireAuthModule,
     NgChartsModule,
     MatSnackBarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    GreenButtonModule
   ],
   providers: [AuthService, AlertService,
     { provide: ErrorHandler, useClass: GlobalErrorHandlerService }

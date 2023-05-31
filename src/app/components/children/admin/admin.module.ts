@@ -27,7 +27,7 @@ import { AlertService } from '../../../services/alert.service';
 import { WorkerService } from './services/worker.service';
 import { SortPipe } from './pipes/sort.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { GreenButtonComponent } from '../../Button/green-button/green-button.component';
+import { GreenButtonModule } from '../../Button/green-button/green-button.module';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,6 @@ import { GreenButtonComponent } from '../../Button/green-button/green-button.com
     GraphComponent,
     InputComponent,
     SortPipe,
-    GreenButtonComponent
   ],
   imports: [
     CommonModule,
@@ -56,7 +55,8 @@ import { GreenButtonComponent } from '../../Button/green-button/green-button.com
     FormsModule,
     MatPaginatorModule,
     NgChartsModule,
-    MatDialogModule
+    MatDialogModule,
+    GreenButtonModule
   ],
   providers: [WorkersService, IconService, AlertService, WorkerService,
     { provide: ErrorHandler, useClass: GlobalErrorHandlerService }
