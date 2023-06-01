@@ -56,7 +56,7 @@ export class RecruitmentComponent{
     { controlName: 'completedEducationalInstitution', label: 'Уч. Учереждение', type: 'text' },
     { controlName: 'education', label: 'Образование', type: 'select' },
     { controlName: 'place', label: 'Место работы*', type: 'text' },
-    { controlName: 'currentSalary', label: 'Зарплата в долларах*', type: 'text' }
+    { controlName: 'currentSalary', label: 'Зарплата в рублях*', type: 'text' }
   ];
 
 
