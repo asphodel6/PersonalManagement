@@ -18,7 +18,7 @@ const cloudIcon: string = `<svg width="91" height="67" viewBox="0 0 91 67" fill=
 export type Card = {
   controlName: string,
   label: string,
-  type: 'text' | 'tel' | 'date' | 'email',
+  type: 'text' | 'tel' | 'date' | 'email' | 'select',
 }
 
 @Component({
@@ -54,12 +54,15 @@ export class RecruitmentComponent{
     { controlName: 'position', label: 'Позиция*', type: 'text' },
     { controlName: 'dateOfBirth', label: 'Дата рождения*', type: 'date' },
     { controlName: 'completedEducationalInstitution', label: 'Уч. Учереждение', type: 'text' },
-    { controlName: 'education', label: 'Образование', type: 'text' },
+    { controlName: 'education', label: 'Образование', type: 'select' },
     { controlName: 'place', label: 'Место работы*', type: 'text' },
     { controlName: 'currentSalary', label: 'Зарплата в долларах*', type: 'text' }
   ];
 
 
+  public get isFormInvalid(): boolean {
+    return this.recruitmentForm.invalid;
+  }
 
   constructor(private _workersService: WorkersService, private _iconService: IconService) {
     this._iconService.add('cloud', cloudIcon);
