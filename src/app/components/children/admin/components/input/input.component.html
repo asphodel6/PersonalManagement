@@ -1,19 +1,24 @@
 <div class="cardOfInput" [formGroup]='recruitmentForm'>
-  <div class="labelWithValid">
-    <div class="label-input">{{ card.label }}</div>
-    <div class="invalid" *ngIf="validationElementMethod(card.controlName)">
-      <div class="invalidMessenger" *ngIf="validationElementMethodRequired(card.controlName)">
-        Это поле обязательно
-      </div>
-      <div class="invalidMessenger" *ngIf="validationElementMethodPattern(card.controlName)">
-        Ваш ввод невалиден
-      </div>
-      <div class="invalidMessenger" *ngIf="validationElementMethodEmail(card.controlName)">
-        Почта некорректна
+  <ng-container *ngIf="card.type === 'select'; else noSelect">
+    <label class="label-input" for="education">Образование:</label>
+    <select id="education" class="select" [(ngModel)]="selectedEducation" [formControlName]="card.controlName">
+      <option *ngFor="let country of educations" [value]="country">{{country}}</option>
+    </select>
+  </ng-container>
+
+  <ng-template #noSelect>
+    <div class="labelWithValid">
+      <div class="label-input">{{ card.label }}</div>
+      <div class="invalid" *ngIf="validationElementMethod(card.controlName)">
+        <div class="invalidMessenger" *ngFor="let error of getErrorMessages(recruitmentForm?.get(card.controlName)!)">
+          {{error}}
+        </div>
       </div>
     </div>
-  </div>
-  <input #input (blur)="onInputChange()" class="input" [type]="card.type" [formControlName]="card.controlName">
+    <input #input (blur)="onInputChange()" class="input" [type]="card.type" [formControlName]="card.controlName">
+  </ng-template>
+
+
 </div>
 
 
