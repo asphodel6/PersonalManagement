@@ -15,6 +15,8 @@ import { GlobalErrorHandlerService } from './services/global-error-handler.servi
 import { AlertService } from './services/alert.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogModule } from './modules/dialog/dialog.module';
+import { ChangeColorOnHoverDirective } from './directives/change-color-on-hover.directive';
 import { GreenButtonModule } from './components/Button/green-button/green-button.module';
 
 @NgModule({
@@ -23,6 +25,7 @@ import { GreenButtonModule } from './components/Button/green-button/green-button
     LoginComponent,
     RegistrationComponent,
     NotFoundComponent,
+    ChangeColorOnHoverDirective,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,7 @@ import { GreenButtonModule } from './components/Button/green-button/green-button
     NgChartsModule,
     MatSnackBarModule,
     BrowserAnimationsModule,
+    DialogModule,
     GreenButtonModule
   ],
   providers: [AuthService, AlertService,

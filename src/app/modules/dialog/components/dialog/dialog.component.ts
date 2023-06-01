@@ -1,18 +1,16 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
-import { WorkerService } from '../../services/worker.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { WorkerService } from '../../../../components/children/admin/services/worker.service';
+import { IDialogInterface } from '../../../../interfaces/dialog.interface';
 
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
-  standalone: true,
-  imports: [MatDialogModule, MatButtonModule],
 })
 export class DialogComponent {
   constructor(public dialogRef: MatDialogRef<DialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: string,
+              @Inject(MAT_DIALOG_DATA) public data: IDialogInterface,
               private _workerService: WorkerService) {
 
   }
@@ -22,7 +20,7 @@ export class DialogComponent {
   }
 
   public onYesClick(): void {
-    this._workerService.deleteWorkerFromDB(this.data);
+    this.data.callbackMethod();
     this.dialogRef.close();
   }
 }

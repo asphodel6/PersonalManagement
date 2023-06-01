@@ -52,7 +52,7 @@
       {{worker.place}}
     </div>
     <div class="user-field">
-      {{worker.currentSalary | currency}}
+      {{worker.currentSalary | currency:'₽'}}
     </div>
     <app-green-button label="Подробнее" (byClick)="more(worker.key)" />
   </div>

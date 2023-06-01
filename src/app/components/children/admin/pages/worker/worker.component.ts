@@ -4,7 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { WorkerService } from '../../services/worker.service';
 import { map, Observable, switchMap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '../../components/dialog/dialog.component';
+import { IDialogInterface } from '../../../../../interfaces/dialog.interface';
+import { DialogService } from '../../../../../services/dialog.service';
 
 const workerData: InjectionToken<Observable<IWorker>> =  new InjectionToken<Observable<IWorker>>('workerData');
 @Component({
@@ -13,6 +14,7 @@ const workerData: InjectionToken<Observable<IWorker>> =  new InjectionToken<Obse
   styleUrls: ['./worker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
+    DialogService,
     {
       provide: workerData,
       useFactory: () => {
@@ -32,13 +34,20 @@ const workerData: InjectionToken<Observable<IWorker>> =  new InjectionToken<Obse
 export class WorkerComponent {
   public workerData$: Observable<IWorker> = inject(workerData);
 
-  constructor(private _matDialog: MatDialog) {
+  constructor(private _matDialog: MatDialog, private _workerService: WorkerService, private _dialogService: DialogService) {
 
   }
 
   public openDialog(id: string): void {
-    this._matDialog.open(DialogComponent, {
-      data: id
-    });
+    const dialog: IDialogInterface = {
+      dialogHeader: 'Подтвердите',
+      dialogContent: 'Удалить сотрудника ?',
+      cancelButtonLabel: 'Нет',
+      confirmButtonLabel: 'Да',
+      callbackMethod: () => {
+        this._workerService.deleteWorkerFromDB(id);
+      }
+    };
+    this._dialogService.openDialog(dialog);
   }
 }

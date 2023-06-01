@@ -31,7 +31,9 @@
   margin-top: 50px;
   mix-blend-mode: normal;
   opacity: 0.9;
+  outline: none;
   border-radius: 16px;
+  border: none;
 
   font-family: 'Poppins', sans-serif;
   font-style: normal;
@@ -44,4 +46,9 @@
 
   cursor: pointer;
 
+  &:disabled {
+    opacity: 0.6;
+    background-color: gray;
+    cursor: unset;
+  }
 }
