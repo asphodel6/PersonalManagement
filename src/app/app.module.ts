@@ -15,6 +15,8 @@ import { GlobalErrorHandlerService } from './services/global-error-handler.servi
 import { AlertService } from './services/alert.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogModule } from './modules/dialog/dialog.module';
+import { ChangeColorOnHoverDirective } from './directives/change-color-on-hover.directive';
 
 
 @NgModule({
@@ -23,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     RegistrationComponent,
     NotFoundComponent,
+    ChangeColorOnHoverDirective,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFireAuthModule,
     NgChartsModule,
     MatSnackBarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DialogModule
   ],
   providers: [AuthService, AlertService,
     { provide: ErrorHandler, useClass: GlobalErrorHandlerService }
