@@ -27,6 +27,7 @@ import { AlertService } from '../../../services/alert.service';
 import { WorkerService } from './services/worker.service';
 import { SortPipe } from './pipes/sort.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { GreenButtonModule } from '../../Button/green-button/green-button.module';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     FormsModule,
     MatPaginatorModule,
     NgChartsModule,
-    MatDialogModule
+    MatDialogModule,
+    GreenButtonModule
   ],
   providers: [WorkersService, IconService, AlertService, WorkerService,
     { provide: ErrorHandler, useClass: GlobalErrorHandlerService }

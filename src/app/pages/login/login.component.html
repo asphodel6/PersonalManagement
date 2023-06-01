@@ -1,24 +1,26 @@
 <div class="container">
-  <div class="title">С возвращением</div>
-  <div class="text description">Заполните поля для входа на сайт</div>
-  <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
-    <div class="text email-description">Email</div>
-    <div><input class="inputForm" type="email" formControlName="email"></div>
-    <div *ngIf="email.invalid && email.touched" class="danger">
-      <div *ngIf="email.errors.required">Email обязателен</div>
-      <div *ngIf="email.errors?.['email']">Неккоректный формат почты</div>
-    </div>
-    <div class="text">Пароль</div>
-    <div><input class="inputForm" type="password" formControlName="password"></div>
-    <div *ngIf="password.invalid && password.touched" class="danger">
-      <div *ngIf="password.errors.required">Пароль обязателен</div>
-      <div *ngIf="password.errors.pattern">Пароль должен быть длиннее 7 символов и содержать цифры</div>
-    </div>
-    <div class="additional">
-    </div>
-    <div>
-      <button [disabled]="loginForm.invalid">Войти</button>
-    </div>
-    <div class="text registration">Еще нет аккаунта ? <span routerLink="/registration" changeColorOnHover>Зарегестрируйтесь здесь</span></div>
-  </form>
+  <div class="content">
+    <div class="title">С возвращением</div>
+    <div class="text description">Заполните поля для входа на сайт</div>
+    <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+      <div class="text email-description">Email</div>
+      <div><input class="inputForm" type="email" formControlName="email"></div>
+      <div *ngIf="email.invalid && email.touched" class="danger">
+        <div *ngIf="email.errors.required">Email обязателен</div>
+        <div *ngIf="email.errors?.['email']">Неккоректный формат почты</div>
+      </div>
+      <div class="text">Пароль</div>
+      <div><input class="inputForm" type="password" formControlName="password"></div>
+      <div *ngIf="password.invalid && password.touched" class="danger">
+        <div *ngIf="password.errors.required">Пароль обязателен</div>
+        <div *ngIf="password.errors.pattern">Пароль должен быть длиннее 7 символов и содержать цифры</div>
+      </div>
+      <div class="additional">
+      </div>
+      <div class="login">
+        <app-green-button width="100%" height="50px" [disabled]="loginForm.invalid" label="Войти" />
+      </div>
+      <div class="text registration">Еще нет аккаунта ? <span routerLink="/registration">Зарегестрируйтесь здесь</span></div>
+    </form>
+  </div>
 </div>

@@ -17,7 +17,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogModule } from './modules/dialog/dialog.module';
 import { ChangeColorOnHoverDirective } from './directives/change-color-on-hover.directive';
-
+import { GreenButtonModule } from './components/Button/green-button/green-button.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,8 @@ import { ChangeColorOnHoverDirective } from './directives/change-color-on-hover.
     NgChartsModule,
     MatSnackBarModule,
     BrowserAnimationsModule,
-    DialogModule
+    DialogModule,
+    GreenButtonModule
   ],
   providers: [AuthService, AlertService,
     { provide: ErrorHandler, useClass: GlobalErrorHandlerService }

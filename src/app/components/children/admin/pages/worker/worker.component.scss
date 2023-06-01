@@ -1,10 +1,11 @@
 @import '../../../../../../styles';
 
 .container {
-  width: 1000px;
-  padding: 30px 0 0 30px;
+  width: 100%;
+  padding: 30px;
   font-family: 'Roboto', sans-serif;
   color: $color-text;
+  max-width: 1200px;
 }
 
 .img {
@@ -144,4 +145,10 @@
   background-color: rgb(43, 153, 91);
   border: 1px solid rgb(33, 126, 74);
   margin-left: 10px;
+}
+
+.buttons-block {
+  display: flex;
+  gap: 15px;
+  margin-left: auto;
 }

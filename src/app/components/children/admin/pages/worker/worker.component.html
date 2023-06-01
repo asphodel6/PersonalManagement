@@ -7,8 +7,10 @@
       <span class="highlight">возраст: {{ workerData.age }}</span>
       <span class="highlight">{{ workerData.currentSalary }} RUB</span>
     </div>
-    <button class="edit-btn">Редактировать</button>
-    <button class="delete-btn" (click)="openDialog(workerData.key)">Удалить</button>
+    <div class="buttons-block">
+      <app-green-button width="125px" label="Редактировать" />
+      <app-green-button width="125px" label="Удалить" (byClick)="openDialog(workerData.key)" />
+    </div>
   </div>
 
   <div class="userInformationBlock">
