@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { WorkersService } from '../../services/workers.service';
 import { IconService } from '../../services/IconService';
 import { IWorker } from '../../interfaces/worker.interface';
+import { Observable } from 'rxjs';
 
 const cloudIcon: string = `<svg width="91" height="67" viewBox="0 0 91 67" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect width="91" height="67" fill="url(#pattern0)"/>
@@ -28,7 +29,6 @@ export type Card = {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RecruitmentComponent{
-
   public readonly patternForValidationName: RegExp = /^(?=.*[а-яА-яA-Za-z])[а-яА-яA-Za-z]{2,}$/;
 
   public recruitmentForm: FormGroup = new FormGroup({

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, InjectionToken } from '@angular/core';
 import { IWorker } from '../../interfaces/worker.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { WorkerService } from '../../services/worker.service';
 import { map, Observable, switchMap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
@@ -33,7 +33,8 @@ const workerData: InjectionToken<Observable<IWorker>> =  new InjectionToken<Obse
 export class WorkerComponent {
   public workerData$: Observable<IWorker> = inject(workerData);
 
-  constructor(private _matDialog: MatDialog, private _workerService: WorkerService, private _dialogService: DialogService) {
+  constructor(private _matDialog: MatDialog, private _workerService: WorkerService, private _dialogService: DialogService,
+              private _router: Router) {
 
   }
 
@@ -47,5 +48,9 @@ export class WorkerComponent {
       } },
     };
     this._dialogService.openDialog(dialog);
+  }
+
+  public updateWorker(id: string): void {
+    this._router.navigate(['admin/recruitment', id]);
   }
 }

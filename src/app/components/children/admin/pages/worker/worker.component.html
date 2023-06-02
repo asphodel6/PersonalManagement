@@ -8,7 +8,7 @@
       <span class="highlight">{{ workerData.currentSalary }} RUB</span>
     </div>
     <div class="buttons-block">
-      <app-green-button width="125px" label="Редактировать" />
+      <app-green-button width="125px" label="Редактировать" (byClick)="updateWorker(workerData.key)" />
       <app-green-button width="125px" label="Удалить" (byClick)="openDialog(workerData.key)" />
     </div>
   </div>

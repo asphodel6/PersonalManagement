@@ -30,8 +30,8 @@ export class WorkersComponent implements OnInit {
     public iconRegistry: MatIconRegistry,
     public sanitizer: DomSanitizer,
     private _router: Router,
-    public workersServive: WorkersService,
-    private _destroy: DestroyService
+    public workersService: WorkersService,
+    private _destroy: DestroyService,
   ) {
   }
 
@@ -68,7 +68,7 @@ export class WorkersComponent implements OnInit {
   public ngOnInit(): void {
     const initPage: PageEvent = new PageEvent();
     initPage.pageIndex = 0;
-    this.workers = this.workersServive.getWorkers();
+    this.workers = this.workersService.getWorkers();
     this.getServerData(initPage);
   }
 
