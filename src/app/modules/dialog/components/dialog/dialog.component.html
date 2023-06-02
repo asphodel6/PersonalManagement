@@ -4,7 +4,7 @@
     {{ data.dialogContent }}
   </div>
   <div mat-dialog-actions class="buttons">
-    <button class="no-btn" mat-button (click)="onNoClick()"><span>{{ data.cancelButtonLabel }}</span></button>
-    <button mat-button (click)="onYesClick()"><span class="yes-btn">{{ data.confirmButtonLabel }}</span></button>
+    <button  mat-button (click)="onNoClick()"><span class="no-btn">{{ data.cancelButton.title }}</span></button>
+    <button mat-button (click)="onYesClick()"><span class="yes-btn">{{ data.confirmButton.title }}</span></button>
   </div>
 </div>

@@ -16,11 +16,12 @@ export class DialogComponent {
   }
 
   public onNoClick(): void {
+    this.data.cancelButton.callback();
     this.dialogRef.close();
   }
 
   public onYesClick(): void {
-    this.data.callbackMethod();
+    this.data.confirmButton.callback();
     this.dialogRef.close();
   }
 }

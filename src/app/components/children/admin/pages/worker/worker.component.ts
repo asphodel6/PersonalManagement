@@ -5,7 +5,7 @@ import { WorkerService } from '../../services/worker.service';
 import { map, Observable, switchMap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { IDialogInterface } from '../../../../../interfaces/dialog.interface';
-import { DialogService } from '../../../../../services/dialog.service';
+import { DialogService } from '../../../../../modules/dialog/services/dialog.service';
 
 const workerData: InjectionToken<Observable<IWorker>> =  new InjectionToken<Observable<IWorker>>('workerData');
 @Component({
@@ -14,7 +14,6 @@ const workerData: InjectionToken<Observable<IWorker>> =  new InjectionToken<Obse
   styleUrls: ['./worker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    DialogService,
     {
       provide: workerData,
       useFactory: () => {
@@ -42,11 +41,10 @@ export class WorkerComponent {
     const dialog: IDialogInterface = {
       dialogHeader: 'Подтвердите',
       dialogContent: 'Удалить сотрудника ?',
-      cancelButtonLabel: 'Нет',
-      confirmButtonLabel: 'Да',
-      callbackMethod: () => {
+      cancelButton: { title: 'Нет', callback: () => {} },
+      confirmButton: { title: 'Да', callback: () => {
         this._workerService.deleteWorkerFromDB(id);
-      }
+      } },
     };
     this._dialogService.openDialog(dialog);
   }

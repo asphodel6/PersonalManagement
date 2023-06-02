@@ -1,7 +1,8 @@
+import { IButtonDialogInterface } from './button.dialog.interface';
+
 export interface IDialogInterface {
-  cancelButtonLabel: string;
-  confirmButtonLabel: string;
+  cancelButton: IButtonDialogInterface;
+  confirmButton: IButtonDialogInterface;
   dialogHeader: string;
   dialogContent: string;
-  callbackMethod: () => void;
 }
