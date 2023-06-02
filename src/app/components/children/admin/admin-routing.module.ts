@@ -10,7 +10,7 @@ const routes: Routes = [
     path: '', component: AdminComponent,
     children: [
       { path: 'recruitment', component: RecruitmentComponent },
-      { path: 'recruitment/:id', component: RecruitmentComponent },
+      { path: 'recruitment/:key', component: RecruitmentComponent },
       { path: 'workers', component: WorkersComponent },
       { path: 'workers/:key', component: WorkerComponent },
       { path: '', redirectTo: 'workers', pathMatch: 'full' }

@@ -1,9 +1,13 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, InjectionToken} from '@angular/core';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { WorkersService } from '../../services/workers.service';
 import { IconService } from '../../services/IconService';
 import { IWorker } from '../../interfaces/worker.interface';
-import { Observable } from 'rxjs';
+import { map, Observable, switchMap, take } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { WorkerService } from '../../services/worker.service';
+
+const workerData: InjectionToken<Observable<IWorker>> =  new InjectionToken<Observable<IWorker>>('workerData');
 
 const cloudIcon: string = `<svg width="91" height="67" viewBox="0 0 91 67" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect width="91" height="67" fill="url(#pattern0)"/>
@@ -26,9 +30,27 @@ export type Card = {
   selector: 'admin-recruitment',
   templateUrl: './recruitment.component.html',
   styleUrls: ['./recruitment.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: workerData,
+      useFactory: () => {
+        const route: ActivatedRoute = inject(ActivatedRoute);
+        const service: WorkerService = inject(WorkerService);
+
+        return route.paramMap
+          .pipe(
+            map((params) => params.get('key') as string),
+            switchMap(id => service.getWorkerFromDB(id))
+          );
+      }
+    }
+  ]
 })
 export class RecruitmentComponent{
+
+  public workerData$: Observable<IWorker> = inject(workerData);
+
   public readonly patternForValidationName: RegExp = /^(?=.*[а-яА-яA-Za-z])[а-яА-яA-Za-z]{2,}$/;
 
   public recruitmentForm: FormGroup = new FormGroup({
@@ -59,13 +81,34 @@ export class RecruitmentComponent{
     { controlName: 'currentSalary', label: 'Зарплата в рублях*', type: 'text' }
   ];
 
+  constructor(private _workersService: WorkersService, private _iconService: IconService,
+              private _formBuilder: FormBuilder,
+              private _cdr: ChangeDetectorRef) {
+    this._iconService.add('cloud', cloudIcon);
+    this.workerData$.pipe(
+      take(1)
+    ).subscribe(worker => {
+      if(worker !== null) {
+        this.recruitmentForm = this._formBuilder.group({
+          name: [worker.name.split(' ')[0]],
+          surname: [worker.name.split(' ')[1]],
+          patronymic: [worker.name.split(' ')[2]],
+          email: [worker.email],
+          telephone: [worker.phone],
+          position: [worker.profession],
+          dateOfBirth: [worker.dateOfBirth],
+          completedEducationalInstitution: [worker.institution],
+          education: [worker.education],
+          place: [worker.place],
+          currentSalary: [worker.currentSalary]
+        });
+      }
+      this._cdr.detectChanges();
+    });
+  }
 
   public get isFormInvalid(): boolean {
     return this.recruitmentForm.invalid;
-  }
-
-  constructor(private _workersService: WorkersService, private _iconService: IconService) {
-    this._iconService.add('cloud', cloudIcon);
   }
 
   public trackByControlName(index:number, card: Card): string {

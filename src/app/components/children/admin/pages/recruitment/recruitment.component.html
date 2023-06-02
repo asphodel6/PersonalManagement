@@ -1,6 +1,5 @@
+<!--<ng-container *ngIf="workerData$ | async as workerData">{{ workerData.name }}</ng-container>-->
 <form [formGroup]='recruitmentForm' (ngSubmit)='submitRecruitment()'>
-
-
   <div class="container">
     <div class="img-block">
       <mat-icon class="img" svgIcon="cloud" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
@@ -12,6 +11,10 @@
     <div class="submit-button">
       <app-green-button label="Сохранить" width="150px" height="50px" [disabled]="isFormInvalid" />
     </div>
-
   </div>
 </form>
+<!--<ng-container *ngIf="workerData$ | async as workerData">-->
+<!--<form [formGroup]="updateForm">-->
+<!--<input formControlName="name">-->
+<!--</form>-->
+<!--</ng-container>-->

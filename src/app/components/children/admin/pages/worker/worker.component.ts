@@ -20,7 +20,6 @@ const workerData: InjectionToken<Observable<IWorker>> =  new InjectionToken<Obse
         const route: ActivatedRoute = inject(ActivatedRoute);
         const service: WorkerService = inject(WorkerService);
 
-
         return route.paramMap
           .pipe(
             map((params) => params.get('key') as string),
