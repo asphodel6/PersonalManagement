@@ -18,8 +18,8 @@ import { SortBy } from '../../pipes/sort.component';
   providers: [DestroyService],
 })
 export class WorkersComponent implements OnInit {
-  public workers!: Observable<IWorkers[]>;
-  public visibleWorkers!: Observable<IWorkers[]>;
+  public workers$!: Observable<IWorkers[]>;
+  public visibleWorkers$!: Observable<IWorkers[]>;
   public searchText: string = '';
   public sortBy: SortBy = SortBy.noSort;
   public pageEvent: PageEvent = new PageEvent();
@@ -40,11 +40,11 @@ export class WorkersComponent implements OnInit {
   };
 
   public getServerData(event: PageEvent): PageEvent {
-    this.workers.pipe(
+    this.workers$.pipe(
       takeUntil(this._destroy)
     ).subscribe((x:IWorkers[]) => this.length = x.length);
 
-    this.visibleWorkers = this.workers
+    this.visibleWorkers$ = this.workers$
       .pipe(map((workers: IWorkers[]) => {
         return workers.filter((el: IWorkers, index: number) => index + 1 > event.pageIndex * this.pageSize && index + 1 <= event.pageIndex* this.pageSize + this.pageSize);
       }));
@@ -68,7 +68,7 @@ export class WorkersComponent implements OnInit {
   public ngOnInit(): void {
     const initPage: PageEvent = new PageEvent();
     initPage.pageIndex = 0;
-    this.workers = this.workersService.getWorkers();
+    this.workers$ = this.workersService.getWorkers();
     this.getServerData(initPage);
   }
 

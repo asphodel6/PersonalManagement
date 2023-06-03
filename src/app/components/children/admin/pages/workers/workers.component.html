@@ -39,7 +39,7 @@
   </div>
 </div>
 <div class="content">
-  <div *ngFor="let worker of visibleWorkers | async | appFilter: searchText | appSort: sortBy let x = index" class="user-container" [ngClass]="{
+  <div *ngFor="let worker of visibleWorkers$ | async | appFilter: searchText | appSort: sortBy let x = index" class="user-container" [ngClass]="{
     even: (x % 2 !== 0)
   }" >
     <div class="user-field user-name">

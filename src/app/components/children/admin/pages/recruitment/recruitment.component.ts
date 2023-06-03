@@ -3,10 +3,10 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { WorkersService } from '../../services/workers.service';
 import { IconService } from '../../services/IconService';
 import { IWorker } from '../../interfaces/worker.interface';
-import { map, Observable, switchMap, take } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { WorkerService } from '../../services/worker.service';
-import { workerData } from '../worker/worker.component';
+import { workerData, workerDataProvider } from '../../providers/worker-data.provider';
 
 const cloudIcon: string = `<svg width="91" height="67" viewBox="0 0 91 67" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect width="91" height="67" fill="url(#pattern0)"/>
@@ -33,16 +33,8 @@ export type Card = {
   providers: [
     {
       provide: workerData,
-      useFactory: () => {
-        const route: ActivatedRoute = inject(ActivatedRoute);
-        const service: WorkerService = inject(WorkerService);
-
-        return route.paramMap
-          .pipe(
-            map((params) => params.get('key') as string),
-            switchMap(id => service.getWorkerFromDB(id))
-          );
-      }
+      useFactory: workerDataProvider,
+      deps: [ActivatedRoute, WorkerService]
     }
   ]
 })
