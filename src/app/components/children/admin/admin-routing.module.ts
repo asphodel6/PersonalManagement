@@ -9,9 +9,9 @@ const routes: Routes = [
   {
     path: '', component: AdminComponent,
     children: [
-      { path: 'recruitment', component: RecruitmentComponent },
-      { path: 'workers', component: WorkersComponent },
-      { path: 'workers/:key', component: WorkerComponent },
+      { path: 'recruitment', component: RecruitmentComponent, data: { animation: 'recruitment' } },
+      { path: 'workers', component: WorkersComponent, data: { animation: 'workers' } },
+      { path: 'workers/:key', component: WorkerComponent, data: { animation: 'worker' } },
       { path: '', redirectTo: 'workers', pathMatch: 'full' }
     ]
   }
