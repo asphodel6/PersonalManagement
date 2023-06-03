@@ -6,8 +6,7 @@ import { IWorker } from '../../interfaces/worker.interface';
 import { map, Observable, switchMap, take } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { WorkerService } from '../../services/worker.service';
-
-const workerData: InjectionToken<Observable<IWorker>> =  new InjectionToken<Observable<IWorker>>('workerData');
+import { workerData } from '../worker/worker.component';
 
 const cloudIcon: string = `<svg width="91" height="67" viewBox="0 0 91 67" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect width="91" height="67" fill="url(#pattern0)"/>

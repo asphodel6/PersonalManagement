@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { IDialogInterface } from '../../../../../interfaces/dialog.interface';
 import { DialogService } from '../../../../../modules/dialog/services/dialog.service';
 
-const workerData: InjectionToken<Observable<IWorker>> =  new InjectionToken<Observable<IWorker>>('workerData');
+export const workerData: InjectionToken<Observable<IWorker>> =  new InjectionToken<Observable<IWorker>>('workerData');
 @Component({
   selector: 'admin-worker',
   templateUrl: './worker.component.html',
