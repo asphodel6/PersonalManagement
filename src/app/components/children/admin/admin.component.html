@@ -4,7 +4,9 @@
       <admin-sidebar></admin-sidebar>
     </div>
     <div class="content">
-      <router-outlet ></router-outlet>
+      <div [@routeAnimations]="getRouteAnimationData()">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </div>
 </div>
