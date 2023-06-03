@@ -1,4 +1,3 @@
-<!--<ng-container *ngIf="workerData$ | async as workerData">{{ workerData.name }}</ng-container>-->
 <form [formGroup]='recruitmentForm' (ngSubmit)='submitRecruitment()'>
   <div class="container">
     <div class="img-block">
@@ -7,14 +6,9 @@
     <ng-container *ngFor="let card of cardsOfInputs; trackBy: trackByControlName">
       <input-recruitment [card]="card" [recruitmentForm]="recruitmentForm"/>
     </ng-container>
-
     <div class="submit-button">
       <app-green-button label="Сохранить" width="150px" height="50px" [disabled]="isFormInvalid" />
     </div>
   </div>
 </form>
-<!--<ng-container *ngIf="workerData$ | async as workerData">-->
-<!--<form [formGroup]="updateForm">-->
-<!--<input formControlName="name">-->
-<!--</form>-->
-<!--</ng-container>-->
+

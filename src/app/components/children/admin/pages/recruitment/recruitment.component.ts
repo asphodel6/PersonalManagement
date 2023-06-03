@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, InjectionToken} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, InjectionToken } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { WorkersService } from '../../services/workers.service';
 import { IconService } from '../../services/IconService';
@@ -51,6 +51,8 @@ export class RecruitmentComponent{
 
   public workerData$: Observable<IWorker> = inject(workerData);
 
+  public worker: IWorker = <IWorker> {};
+
   public readonly patternForValidationName: RegExp = /^(?=.*[а-яА-яA-Za-z])[а-яА-яA-Za-z]{2,}$/;
 
   public recruitmentForm: FormGroup = new FormGroup({
@@ -62,7 +64,7 @@ export class RecruitmentComponent{
     position: new FormControl('', Validators.required),
     dateOfBirth: new FormControl('', Validators.required),
     completedEducationalInstitution: new FormControl(''),
-    education: new FormControl(''),
+    education: new FormControl('', Validators.required),
     place: new FormControl('', Validators.required),
     currentSalary: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)])
   });
@@ -76,7 +78,7 @@ export class RecruitmentComponent{
     { controlName: 'position', label: 'Позиция*', type: 'text' },
     { controlName: 'dateOfBirth', label: 'Дата рождения*', type: 'date' },
     { controlName: 'completedEducationalInstitution', label: 'Уч. Учереждение', type: 'text' },
-    { controlName: 'education', label: 'Образование', type: 'select' },
+    { controlName: 'education', label: 'Образование*', type: 'select' },
     { controlName: 'place', label: 'Место работы*', type: 'text' },
     { controlName: 'currentSalary', label: 'Зарплата в рублях*', type: 'text' }
   ];
@@ -89,6 +91,7 @@ export class RecruitmentComponent{
       take(1)
     ).subscribe(worker => {
       if(worker !== null) {
+        this.worker = worker;
         this.recruitmentForm = this._formBuilder.group({
           name: [worker.name.split(' ')[0]],
           surname: [worker.name.split(' ')[1]],
@@ -116,7 +119,7 @@ export class RecruitmentComponent{
   }
 
   public submitRecruitment(): void {
-    this._workersService.setWorker(this.recruitmentForm.value, <IWorker>{});
+    this._workersService.setWorker(this.recruitmentForm.value, this.worker);
     this.recruitmentForm.reset();
   }
 }
