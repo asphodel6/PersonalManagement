@@ -16,10 +16,9 @@ import {
 export class InputComponent {
   @Input() public card!: Card;
   @Input() public recruitmentForm!: FormGroup;
-  @Input() public type?: string;
+  @Input() public selectedEducation!: string;
   @ViewChild('input') public input?: ElementRef;
 
-  public selectedEducation: string | undefined;
   public educations: string[] = ['Общее', 'Профессиональное', 'Основное', 'Среднее общее', 'Высшее'];
 
   public onInputChange(): void {

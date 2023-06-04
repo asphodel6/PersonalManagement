@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { WorkersService } from '../../services/workers.service';
 import { IconService } from '../../services/IconService';
 import { IWorker } from '../../interfaces/worker.interface';
-import { Observable, take } from 'rxjs';
+import { Observable, ReplaySubject, take } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { WorkerService } from '../../services/worker.service';
 import { workerData, workerDataProvider } from '../../providers/worker-data.provider';
@@ -60,6 +60,8 @@ export class RecruitmentComponent{
     currentSalary: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)])
   });
 
+  public recruitmentForm$: ReplaySubject<FormGroup> = new ReplaySubject<FormGroup>(1);
+
   public readonly cardsOfInputs: Card[] = [
     { controlName: 'name', label: 'Имя*', type: 'text' },
     { controlName: 'surname', label: 'Фамилия*', type: 'text' },
@@ -75,8 +77,7 @@ export class RecruitmentComponent{
   ];
 
   constructor(private _workersService: WorkersService, private _iconService: IconService,
-              private _formBuilder: FormBuilder,
-              private _cdr: ChangeDetectorRef) {
+              private _formBuilder: FormBuilder) {
     this._iconService.add('cloud', cloudIcon);
     this.workerData$.pipe(
       take(1)
@@ -97,7 +98,7 @@ export class RecruitmentComponent{
           currentSalary: [worker.currentSalary]
         });
       }
-      this._cdr.detectChanges();
+      this.recruitmentForm$.next(this.recruitmentForm);
     });
   }
 
