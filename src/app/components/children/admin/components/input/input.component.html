@@ -1,6 +1,6 @@
 <div class="cardOfInput" [formGroup]='recruitmentForm'>
   <ng-container *ngIf="card.type === 'select'; else noSelect">
-    <label class="label-input" for="education">Образование:</label>
+    <label class="label-input" for="education">{{ card.label }}</label>
     <select id="education" class="select" [(ngModel)]="selectedEducation" [formControlName]="card.controlName">
       <option *ngFor="let country of educations" [value]="country">{{country}}</option>
     </select>
