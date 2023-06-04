@@ -1,12 +1,12 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild, Renderer2 } from '@angular/core';
 import { Card } from '../../pages/recruitment/recruitment.component';
 import {
   FormGroup,
   AbstractControl,
-  ɵGetProperty,
-  ɵTypedOrUntyped,
-  ɵFormGroupRawValue
 } from '@angular/forms';
+
+
+
 
 @Component({
   selector: 'input-recruitment',
@@ -22,11 +22,23 @@ export class InputComponent {
   public selectedEducation: string | undefined;
   public educations: string[] = ['Общее', 'Профессиональное', 'Основное', 'Среднее общее', 'Высшее'];
 
+
+  private _errors: Record<string, string> = {
+    required: 'Это поле обязательно',
+    maxlength: 'Максимальная длинна 15',
+    pattern: 'Поле не валидно',
+    email: 'почта введена неверно'
+  };
+
+  constructor(private _renderer: Renderer2) {
+  }
+
   public onInputChange(): void {
+
     if (this.recruitmentForm.get(this.card.controlName)?.invalid && this.recruitmentForm.get(this.card.controlName)?.touched) {
-      this.input!.nativeElement.style.border = '2px solid red';
+      this._renderer.setStyle(this.input?.nativeElement, 'border', '2px solid red');
     } else {
-      this.input!.nativeElement.style.border = 'none';
+      this._renderer.setStyle(this.input?.nativeElement, 'border', 'none');
     }
   }
 
@@ -34,24 +46,13 @@ export class InputComponent {
     return !!(this.recruitmentForm.get(controlName)?.invalid && this.recruitmentForm.get(controlName)?.touched);
   }
 
-  public getErrorMessages(control: AbstractControl<ɵGetProperty<ɵTypedOrUntyped<any, ɵFormGroupRawValue<any>, any>, string>>): string[] {
+
+  public getErrorMessages<T>(control: AbstractControl<T>): string[] {
     const messages: string[] = [];
     if (control.errors) {
       for (const errorName in control.errors) {
-        switch (errorName) {
-          case 'required':
-            messages.push('Это поле обязательно');
-            break;
-          case 'maxlength':
-            messages.push(`Максимальная длинна 15`);
-            break;
-          case 'pattern':
-            messages.push(`Поле не валидно`);
-            break;
-          case 'email':
-            messages.push(`почта введена неверно`);
-            break;
-        }
+        const mesValue: string = this._errors[errorName] || 'Ввод не валиден';
+        messages.push(mesValue);
       }
     }
 

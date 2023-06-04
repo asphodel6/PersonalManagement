@@ -29,6 +29,7 @@ import { SortPipe } from './pipes/sort.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { GreenButtonModule } from '../../Button/green-button/green-button.module';
 import { DialogModule } from '../../../modules/dialog/dialog.module';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { DialogModule } from '../../../modules/dialog/dialog.module';
     NgChartsModule,
     MatDialogModule,
     GreenButtonModule,
-    DialogModule
+    DialogModule,
+    MatSelectModule
   ],
   providers: [WorkersService, IconService, AlertService, WorkerService,
     { provide: ErrorHandler, useClass: GlobalErrorHandlerService }

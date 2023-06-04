@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -12,6 +12,14 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent implements OnInit{
 
   public loginForm!: FormGroup;
+
+  private _errors: Record<string, string> = {
+    required: 'обязателен',
+    maxlength: 'Максимальная длинна 15',
+    pattern: 'Пароль должен быть длиннее 7 символов и содержать цифры',
+    email: 'Неккоректный формат почты'
+  };
+
 
   constructor(
       private _router: Router,
@@ -31,12 +39,22 @@ export class LoginComponent implements OnInit{
     this.loginForm.get('password')?.reset();
   }
 
-  public get email(): any {
-    return this.loginForm.get('email');
+
+
+  public validationElementMethod(controlName: string): boolean {
+    return !!(this.loginForm.get(controlName)?.invalid && this.loginForm.get(controlName)?.touched);
   }
 
-  public get password(): any {
-    return this.loginForm.get('password');
+  public getErrorMessages<T>(control: AbstractControl<T>): string[] {
+    const messages: string[] = [];
+    if (control.errors) {
+      for (const errorName in control.errors) {
+        const mesValue: string = this._errors[errorName] || 'Ввод не валиден';
+        messages.push(mesValue);
+      }
+    }
+
+    return messages;
   }
 }
 
