@@ -7,14 +7,14 @@
       <div><input class="inputForm" type="email" formControlName="email"></div>
       <div *ngIf="validationElementMethod('email')" class="danger">
         <div class="invalidMessenger" *ngFor="let error of getErrorMessages(loginForm.get('email')!)">
-          Адрес почты {{error}}
+          {{error}}
         </div>
       </div>
       <div class="text">Пароль</div>
       <div><input class="inputForm" type="password" formControlName="password"></div>
       <div *ngIf="validationElementMethod('password')" class="danger">
         <div class="invalidMessenger" *ngFor="let error of getErrorMessages(loginForm.get('password')!)">
-          Пароль {{error}}
+          {{error}}
         </div>
       </div>
       <div class="additional">

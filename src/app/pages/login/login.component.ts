@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit{
   public loginForm!: FormGroup;
 
   private _errors: Record<string, string> = {
-    required: 'обязателен',
+    required: 'это поле обязательно',
     maxlength: 'Максимальная длинна 15',
     pattern: 'Пароль должен быть длиннее 7 символов и содержать цифры',
     email: 'Неккоректный формат почты'
