@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewChild, OnInit, Renderer2 } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { WorkersService } from '../../services/workers.service';
 import { IconService } from '../../services/IconService';
@@ -27,14 +27,18 @@ export type Card = {
   styleUrls: ['./recruitment.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RecruitmentComponent{
+export class RecruitmentComponent implements OnInit {
+
+  @ViewChild('img') public image!: ElementRef;
+  @ViewChild('inputImg') public inputImage!: ElementRef;
 
   public readonly patternForValidationName: RegExp = /^(?=.*[а-яА-яA-Za-z])[а-яА-яA-Za-z]{2,}$/;
 
+
   public recruitmentForm: FormGroup = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.pattern(this.patternForValidationName),Validators.maxLength(15)]),
-    surname: new FormControl('', [Validators.required, Validators.pattern(this.patternForValidationName),Validators.maxLength(20)]),
-    patronymic: new FormControl('', [Validators.pattern(this.patternForValidationName),Validators.maxLength(15)]),
+    name: new FormControl('', [Validators.required, Validators.pattern(this.patternForValidationName), Validators.maxLength(15)]),
+    surname: new FormControl('', [Validators.required, Validators.pattern(this.patternForValidationName), Validators.maxLength(20)]),
+    patronymic: new FormControl('', [Validators.pattern(this.patternForValidationName), Validators.maxLength(15)]),
     email: new FormControl('', [Validators.email]),
     telephone: new FormControl('', [Validators.pattern(/^\+7\d{10}$/)]),
     position: new FormControl('', Validators.required),
@@ -60,15 +64,24 @@ export class RecruitmentComponent{
   ];
 
 
+  constructor(private _workersService: WorkersService, private _iconService: IconService, private _renderer: Renderer2) {
+    this._iconService.add('cloud', cloudIcon);
+  }
+
+  public makeImage = (): void => {
+    this._renderer.setAttribute(this.image.nativeElement, 'src', URL.createObjectURL(this.inputImage.nativeElement.files[0]));
+  };
+
+  public ngOnInit(): void {
+    this.makeImage();
+  }
+
   public get isFormInvalid(): boolean {
     return this.recruitmentForm.invalid;
   }
 
-  constructor(private _workersService: WorkersService, private _iconService: IconService) {
-    this._iconService.add('cloud', cloudIcon);
-  }
 
-  public trackByControlName(index:number, card: Card): string {
+  public trackByControlName(index: number, card: Card): string {
     return card.controlName;
   }
 

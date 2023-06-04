@@ -11,8 +11,17 @@
   background-color: $color-secondary;
 }
 
+.headRecruit {
+  display: flex;
+
+  align-items: flex-end;
+}
+
 .img-block {
-  margin-right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
   width: 116px;
   height: 115px;
   background: #D9D9D9;
@@ -20,10 +29,14 @@
 }
 
 .img {
-  margin-left: 5%;
-  margin-top: 5%;
-  width: 90%;
-  height: 90%;
+  max-width: 110%;
+  min-width: 100%;
+  max-height: 120%;
+  border-radius: 15px;
+}
+
+.inputImg {
+
 }
 
 
@@ -52,3 +65,25 @@
     cursor: unset;
   }
 }
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.custom-file-upload::before {
+  content: "\f0ee";
+  margin-right: 8px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
