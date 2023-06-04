@@ -2,6 +2,7 @@
   <ng-container *ngIf="card.type === 'select'; else noSelect">
     <label class="label-input" for="education">{{ card.label }}</label>
     <select id="education" class="select" [(ngModel)]="selectedEducation" [formControlName]="card.controlName">
+      <option value="" disabled></option>
       <option *ngFor="let country of educations" [value]="country">{{country}}</option>
     </select>
   </ng-container>
