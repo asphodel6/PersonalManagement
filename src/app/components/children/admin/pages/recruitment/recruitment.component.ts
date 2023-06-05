@@ -80,7 +80,7 @@ export class RecruitmentComponent {
       if (worker !== null) {
         this.worker = worker;
         this.recruitmentForm = this._formBuilder.group({
-          img: this.dataURL,
+          img: [worker.img],
           name: [worker.name.split(' ')[0]],
           surname: [worker.name.split(' ')[1]],
           patronymic: [worker.name.split(' ')[2]],
@@ -108,6 +108,7 @@ export class RecruitmentComponent {
     const ctx:CanvasRenderingContext2D = canvas.getContext('2d')!;
     ctx.drawImage(image, 0, 0);
     this.dataURL = canvas.toDataURL();
+    this.recruitmentForm.get('img')?.setValue(this.dataURL);
   };
 
   public get isFormInvalid(): boolean {
