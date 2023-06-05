@@ -1,17 +1,16 @@
 <form [formGroup]='recruitmentForm' (ngSubmit)='submitRecruitment()'>
-
-
   <div class="container">
     <div class="img-block">
       <mat-icon class="img" svgIcon="cloud" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
     </div>
     <ng-container *ngFor="let card of cardsOfInputs; trackBy: trackByControlName">
-      <input-recruitment [card]="card" [recruitmentForm]="recruitmentForm"/>
+      <div *ngIf="recruitmentForm$ | async as recruitmentForm">
+      <input-recruitment [card]="card" [recruitmentForm]="recruitmentForm" [selectedEducation]="recruitmentForm.controls['education'].value"/>
+      </div>
     </ng-container>
-
     <div class="submit-button">
       <app-green-button label="Сохранить" width="150px" height="50px" [disabled]="isFormInvalid" />
     </div>
-
   </div>
 </form>
+

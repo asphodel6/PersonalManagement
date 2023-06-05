@@ -1,8 +1,12 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { WorkersService } from '../../services/workers.service';
 import { IconService } from '../../services/IconService';
 import { IWorker } from '../../interfaces/worker.interface';
+import { Observable, ReplaySubject, take } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { WorkerService } from '../../services/worker.service';
+import { workerData, workerDataProvider } from '../../providers/worker-data.provider';
 
 const cloudIcon: string = `<svg width="91" height="67" viewBox="0 0 91 67" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect width="91" height="67" fill="url(#pattern0)"/>
@@ -25,9 +29,20 @@ export type Card = {
   selector: 'admin-recruitment',
   templateUrl: './recruitment.component.html',
   styleUrls: ['./recruitment.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: workerData,
+      useFactory: workerDataProvider,
+      deps: [ActivatedRoute, WorkerService]
+    }
+  ]
 })
 export class RecruitmentComponent{
+
+  public workerData$: Observable<IWorker> = inject(workerData);
+
+  public worker: IWorker = <IWorker> {};
 
   public readonly patternForValidationName: RegExp = /^(?=.*[а-яА-яA-Za-z])[а-яА-яA-Za-z]{2,}$/;
 
@@ -40,10 +55,12 @@ export class RecruitmentComponent{
     position: new FormControl('', Validators.required),
     dateOfBirth: new FormControl('', Validators.required),
     completedEducationalInstitution: new FormControl(''),
-    education: new FormControl(''),
+    education: new FormControl('', Validators.required),
     place: new FormControl('', Validators.required),
     currentSalary: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)])
   });
+
+  public recruitmentForm$: ReplaySubject<FormGroup> = new ReplaySubject<FormGroup>(1);
 
   public readonly cardsOfInputs: Card[] = [
     { controlName: 'name', label: 'Имя*', type: 'text' },
@@ -54,18 +71,39 @@ export class RecruitmentComponent{
     { controlName: 'position', label: 'Позиция*', type: 'text' },
     { controlName: 'dateOfBirth', label: 'Дата рождения*', type: 'date' },
     { controlName: 'completedEducationalInstitution', label: 'Уч. Учереждение', type: 'text' },
-    { controlName: 'education', label: 'Образование', type: 'select' },
+    { controlName: 'education', label: 'Образование*', type: 'select' },
     { controlName: 'place', label: 'Место работы*', type: 'text' },
     { controlName: 'currentSalary', label: 'Зарплата в рублях*', type: 'text' }
   ];
 
+  constructor(private _workersService: WorkersService, private _iconService: IconService,
+              private _formBuilder: FormBuilder) {
+    this._iconService.add('cloud', cloudIcon);
+    this.workerData$.pipe(
+      take(1)
+    ).subscribe(worker => {
+      if(worker !== null) {
+        this.worker = worker;
+        this.recruitmentForm = this._formBuilder.group({
+          name: [worker.name.split(' ')[0]],
+          surname: [worker.name.split(' ')[1]],
+          patronymic: [worker.name.split(' ')[2]],
+          email: [worker.email],
+          telephone: [worker.phone],
+          position: [worker.profession],
+          dateOfBirth: [worker.dateOfBirth],
+          completedEducationalInstitution: [worker.institution],
+          education: [worker.education],
+          place: [worker.place],
+          currentSalary: [worker.currentSalary]
+        });
+      }
+      this.recruitmentForm$.next(this.recruitmentForm);
+    });
+  }
 
   public get isFormInvalid(): boolean {
     return this.recruitmentForm.invalid;
-  }
-
-  constructor(private _workersService: WorkersService, private _iconService: IconService) {
-    this._iconService.add('cloud', cloudIcon);
   }
 
   public trackByControlName(index:number, card: Card): string {
@@ -73,7 +111,7 @@ export class RecruitmentComponent{
   }
 
   public submitRecruitment(): void {
-    this._workersService.setWorker(this.recruitmentForm.value, <IWorker>{});
+    this._workersService.setWorker(this.recruitmentForm.value, this.worker);
     this.recruitmentForm.reset();
   }
 }

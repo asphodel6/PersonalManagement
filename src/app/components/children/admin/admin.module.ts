@@ -29,6 +29,8 @@ import { SortPipe } from './pipes/sort.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { GreenButtonModule } from '../../Button/green-button/green-button.module';
 import { DialogModule } from '../../../modules/dialog/dialog.module';
+import { LetDirective } from './directives/let.directive';
+
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { DialogModule } from '../../../modules/dialog/dialog.module';
     GraphComponent,
     InputComponent,
     SortPipe,
+    LetDirective
   ],
   imports: [
     CommonModule,
