@@ -52,6 +52,7 @@ export class RecruitmentComponent implements OnInit {
 
 
   public recruitmentForm: FormGroup = new FormGroup({
+    img: new FormControl(),
     name: new FormControl('', [Validators.required, Validators.pattern(this.patternForValidationName), Validators.maxLength(15)]),
     surname: new FormControl('', [Validators.required, Validators.pattern(this.patternForValidationName), Validators.maxLength(20)]),
     patronymic: new FormControl('', [Validators.pattern(this.patternForValidationName), Validators.maxLength(15)]),
@@ -90,6 +91,7 @@ export class RecruitmentComponent implements OnInit {
       if(worker !== null) {
         this.worker = worker;
         this.recruitmentForm = this._formBuilder.group({
+          img: [worker.img],
           name: [worker.name.split(' ')[0]],
           surname: [worker.name.split(' ')[1]],
           patronymic: [worker.name.split(' ')[2]],
@@ -108,6 +110,7 @@ export class RecruitmentComponent implements OnInit {
   }
 
   public makeImage = (): void => {
+    console.log(this.inputImage.nativeElement.files[0]);
     this._renderer.setAttribute(this.image.nativeElement, 'src', URL.createObjectURL(this.inputImage.nativeElement.files[0]));
   };
 

@@ -1,4 +1,5 @@
 export interface IWorker {
+  img: File,
   name: string,
   profession: string,
   age: string,
