@@ -9,5 +9,6 @@ export interface IRecruitmentForm {
   completedEducationalInstitution: string,
   education: string,
   currentSalary: number,
-  place: string
+  place: string,
+  img: string
 }

@@ -29,7 +29,9 @@ export type Card = {
 })
 export class RecruitmentComponent {
 
-  @ViewChild('img') public image!: ElementRef;
+  public dataURL: string = '';
+
+  @ViewChild('img', { static: true }) public myImage!: ElementRef;
   @ViewChild('inputImg') public inputImage!: ElementRef;
 
   public workerData$: Observable<IWorker> = inject(workerData);
@@ -40,7 +42,7 @@ export class RecruitmentComponent {
 
 
   public recruitmentForm: FormGroup = new FormGroup({
-    img: new FormControl(),
+    img: new FormControl(''),
     name: new FormControl('', [Validators.required, Validators.pattern(this.patternForValidationName), Validators.maxLength(15)]),
     surname: new FormControl('', [Validators.required, Validators.pattern(this.patternForValidationName), Validators.maxLength(20)]),
     patronymic: new FormControl('', [Validators.pattern(this.patternForValidationName), Validators.maxLength(15)]),
@@ -97,7 +99,20 @@ export class RecruitmentComponent {
   }
 
   public makeImage = (): void => {
-    this._renderer.setAttribute(this.image.nativeElement, 'src', URL.createObjectURL(this.inputImage.nativeElement.files[0]));
+    // const myImage: HTMLImageElement = this.myImage.nativeElement;
+    const canvas: HTMLCanvasElement = this._renderer.createElement('canvas');
+    const image: HTMLImageElement = new Image();
+    this._renderer.setAttribute(image, 'src', URL.createObjectURL(this.inputImage.nativeElement.files[0]));
+    image.onload = ():void => {
+      this._renderer.setAttribute(canvas, 'width', image.naturalWidth.toString());
+      this._renderer.setAttribute(canvas, 'height', image.naturalHeight.toString());
+      const ctx:CanvasRenderingContext2D = canvas.getContext('2d')!;
+      ctx.drawImage(image, 0, 0);
+      this.dataURL = canvas.toDataURL();
+      this.recruitmentForm.get('img')?.setValue(this.dataURL);
+      console.log(this.recruitmentForm.get('img')?.value);
+    };
+    this.myImage.nativeElement.src = image.src;
   };
 
   public get isFormInvalid(): boolean {
@@ -110,6 +125,7 @@ export class RecruitmentComponent {
   }
 
   public submitRecruitment(): void {
+    console.log(this.dataURL);
     this._workersService.setWorker(this.recruitmentForm.value, this.worker);
     this.recruitmentForm.reset();
   }
