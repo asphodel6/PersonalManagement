@@ -121,6 +121,7 @@ export class RecruitmentComponent {
   }
 
   public submitRecruitment(): void {
+    console.log(this.dataURL);
     this._workersService.setWorker(this.recruitmentForm.value, this.worker);
     this.recruitmentForm.reset();
   }
