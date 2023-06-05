@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
@@ -9,9 +9,17 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./registration.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RegistrationComponent implements OnInit{
+export class RegistrationComponent implements OnInit {
 
   public registrationForm!: FormGroup;
+
+  private _errors: Record<string, string> = {
+    required: 'это поле обязательно',
+    maxlength: 'Максимальная длинна 15',
+    pattern: 'Пароль должен быть длиннее 7 символов и содержать цифры',
+    email: 'Неккоректный формат почты'
+  };
+
 
   constructor(
     private _router: Router,
@@ -23,7 +31,7 @@ export class RegistrationComponent implements OnInit{
     this.registrationForm = new FormGroup({
       'email': new FormControl('', [Validators.required, Validators.email]),
       'password': new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)]),
-      'repeat': new FormControl('',[Validators.required])
+      'repeat': new FormControl('', [Validators.required])
     });
   }
 
@@ -33,15 +41,25 @@ export class RegistrationComponent implements OnInit{
     this.registrationForm.get('repeat')?.reset();
   }
 
-  public get email(): any {
-    return this.registrationForm.get('email');
+
+
+  public repeatPassportValid(): boolean {
+    return  this.registrationForm?.get('password')?.value !== this.registrationForm?.get('repeat')?.value;
   }
 
-  public get password(): any {
-    return this.registrationForm.get('password');
+  public validationElementMethod(controlName: string): boolean {
+    return !!(this.registrationForm.get(controlName)?.invalid && this.registrationForm.get(controlName)?.touched);
   }
 
-  public get repeat(): any {
-    return this.registrationForm.get('repeat');
+  public getErrorMessages<T>(control: AbstractControl<T>): string[] {
+    const messages: string[] = [];
+    if (control.errors) {
+      for (const errorName in control.errors) {
+        const mesValue: string = this._errors[errorName] || 'Ввод не валиден';
+        messages.push(mesValue);
+      }
+    }
+
+    return messages;
   }
 }

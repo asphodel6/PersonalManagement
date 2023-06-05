@@ -1,7 +1,14 @@
 <form [formGroup]='recruitmentForm' (ngSubmit)='submitRecruitment()'>
   <div class="container">
-    <div class="img-block">
-      <mat-icon class="img" svgIcon="cloud" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
+    <div class="headRecruit">
+      <div  class="img-block">
+        <img class="img" #img src="img.png" alt="">
+        <!--      <mat-icon class="img" svgIcon="cloud" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>-->
+      </div>
+      <label for="inputImg" class="custom-file-upload">
+        <i class="fa fa-cloud-upload"></i> Загрузить зображение
+      </label>
+      <input (change)="makeImage()" id="inputImg" #inputImg class="inputImg" type="file" multiple>
     </div>
     <ng-container *ngFor="let card of cardsOfInputs; trackBy: trackByControlName">
       <div *ngIf="recruitmentForm$ | async as recruitmentForm">

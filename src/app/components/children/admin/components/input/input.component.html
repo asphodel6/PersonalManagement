@@ -1,25 +1,26 @@
 <div class="cardOfInput" [formGroup]='recruitmentForm'>
   <ng-container *ngIf="card.type === 'select'; else noSelect">
-    <label class="label-input" for="education">{{ card.label }}</label>
-    <select id="education" class="select" [(ngModel)]="selectedEducation" [formControlName]="card.controlName">
-      <option value="" disabled></option>
-      <option *ngFor="let country of educations" [value]="country">{{country}}</option>
-    </select>
+    <label class="label-input">Образование:</label>
+    <div class="select">
+      <mat-select [(ngModel)]="selectedEducation" [formControlName]="card.controlName">
+        <mat-option *ngFor="let education of educations" [value]="education">
+          {{education}}
+        </mat-option>
+      </mat-select>
+    </div>
   </ng-container>
 
   <ng-template #noSelect>
     <div class="labelWithValid">
       <div class="label-input">{{ card.label }}</div>
       <div class="invalid" *ngIf="validationElementMethod(card.controlName)">
-        <div class="invalidMessenger" *ngFor="let error of getErrorMessages(recruitmentForm?.get(card.controlName)!)">
+        <div class="invalidMessenger" *ngFor="let error of getErrorMessages(recruitmentForm.get(card.controlName)!)">
           {{error}}
         </div>
       </div>
     </div>
     <input #input (blur)="onInputChange()" class="input" [type]="card.type" [formControlName]="card.controlName">
   </ng-template>
-
-
 </div>
 
 

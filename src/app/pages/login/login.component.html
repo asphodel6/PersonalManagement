@@ -5,15 +5,17 @@
     <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
       <div class="text email-description">Email</div>
       <div><input class="inputForm" type="email" formControlName="email"></div>
-      <div *ngIf="email.invalid && email.touched" class="danger">
-        <div *ngIf="email.errors.required">Email обязателен</div>
-        <div *ngIf="email.errors?.['email']">Неккоректный формат почты</div>
+      <div *ngIf="validationElementMethod('email')" class="danger">
+        <div class="invalidMessenger" *ngFor="let error of getErrorMessages(loginForm.get('email')!)">
+          {{error}}
+        </div>
       </div>
       <div class="text">Пароль</div>
       <div><input class="inputForm" type="password" formControlName="password"></div>
-      <div *ngIf="password.invalid && password.touched" class="danger">
-        <div *ngIf="password.errors.required">Пароль обязателен</div>
-        <div *ngIf="password.errors.pattern">Пароль должен быть длиннее 7 символов и содержать цифры</div>
+      <div *ngIf="validationElementMethod('password')" class="danger">
+        <div class="invalidMessenger" *ngFor="let error of getErrorMessages(loginForm.get('password')!)">
+          {{error}}
+        </div>
       </div>
       <div class="additional">
       </div>
