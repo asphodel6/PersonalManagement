@@ -40,6 +40,7 @@ export class WorkersService  {
     worker.institution = form.completedEducationalInstitution;
     worker.age = this.calculateAge(workerDateOfBirth, workerDeviceDate);
     worker.place = form.place;
+    worker.img = form.img;
     this.pushWorker(worker);
   }
 
