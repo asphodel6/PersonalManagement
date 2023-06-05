@@ -30,6 +30,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { GreenButtonModule } from '../../Button/green-button/green-button.module';
 import { DialogModule } from '../../../modules/dialog/dialog.module';
 import { MatSelectModule } from '@angular/material/select';
+import { LetDirective } from './directives/let.directive';
+
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { MatSelectModule } from '@angular/material/select';
     GraphComponent,
     InputComponent,
     SortPipe,
+    LetDirective
   ],
   imports: [
     CommonModule,

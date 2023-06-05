@@ -1,13 +1,13 @@
-import { ChangeDetectionStrategy, Component, inject, InjectionToken } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { IWorker } from '../../interfaces/worker.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { WorkerService } from '../../services/worker.service';
-import { map, Observable, switchMap } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 import { IDialogInterface } from '../../../../../interfaces/dialog.interface';
 import { DialogService } from '../../../../../modules/dialog/services/dialog.service';
+import { workerData, workerDataProvider } from '../../providers/worker-data.provider';
 
-const workerData: InjectionToken<Observable<IWorker>> =  new InjectionToken<Observable<IWorker>>('workerData');
+
 @Component({
   selector: 'admin-worker',
   templateUrl: './worker.component.html',
@@ -16,24 +16,15 @@ const workerData: InjectionToken<Observable<IWorker>> =  new InjectionToken<Obse
   providers: [
     {
       provide: workerData,
-      useFactory: () => {
-        const route: ActivatedRoute = inject(ActivatedRoute);
-        const service: WorkerService = inject(WorkerService);
-
-
-        return route.paramMap
-          .pipe(
-            map((params) => params.get('key') as string),
-            switchMap(id => service.getWorkerFromDB(id))
-          );
-      }
+      useFactory: workerDataProvider,
+      deps: [ActivatedRoute, WorkerService]
     }
   ]
 })
 export class WorkerComponent {
   public workerData$: Observable<IWorker> = inject(workerData);
 
-  constructor(private _matDialog: MatDialog, private _workerService: WorkerService, private _dialogService: DialogService) {
+  constructor(private _workerService: WorkerService, private _dialogService: DialogService, private _router: Router) {
 
   }
 
@@ -47,5 +38,9 @@ export class WorkerComponent {
       } },
     };
     this._dialogService.openDialog(dialog);
+  }
+
+  public updateWorker(id: string): void {
+    this._router.navigate(['admin/recruitment', id]);
   }
 }

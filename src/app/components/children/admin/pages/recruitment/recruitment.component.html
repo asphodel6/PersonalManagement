@@ -1,6 +1,4 @@
 <form [formGroup]='recruitmentForm' (ngSubmit)='submitRecruitment()'>
-
-
   <div class="container">
     <div class="headRecruit">
       <div  class="img-block">
@@ -12,13 +10,14 @@
       </label>
       <input (change)="makeImage()" id="inputImg" #inputImg class="inputImg" type="file" multiple>
     </div>
-        <ng-container *ngFor="let card of cardsOfInputs; trackBy: trackByControlName">
-      <input-recruitment [card]="card" [recruitmentForm]="recruitmentForm"/>
+    <ng-container *ngFor="let card of cardsOfInputs; trackBy: trackByControlName">
+      <div *ngIf="recruitmentForm$ | async as recruitmentForm">
+      <input-recruitment [card]="card" [recruitmentForm]="recruitmentForm" [selectedEducation]="recruitmentForm.controls['education'].value"/>
+      </div>
     </ng-container>
-
     <div class="submit-button">
       <app-green-button label="Сохранить" width="150px" height="50px" [disabled]="isFormInvalid" />
     </div>
-
   </div>
 </form>
+
