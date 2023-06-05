@@ -7,7 +7,7 @@
       <label for="inputImg" class="custom-file-upload">
         <i class="fa fa-cloud-upload"></i> Загрузить зображение
       </label>
-      <input (change)="makeImage()" id="inputImg" #inputImg class="inputImg" type="file" multiple formControlName="img">
+      <input (change)="makeImage()" id="inputImg" #inputImg class="inputImg" type="file" multiple>
     </div>
     <ng-container *ngFor="let card of cardsOfInputs; trackBy: trackByControlName">
       <div *ngIf="recruitmentForm$ | async as recruitmentForm">

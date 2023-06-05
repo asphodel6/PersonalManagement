@@ -108,7 +108,6 @@ export class RecruitmentComponent {
     const ctx:CanvasRenderingContext2D = canvas.getContext('2d')!;
     ctx.drawImage(image, 0, 0);
     this.dataURL = canvas.toDataURL();
-    console.log(this.dataURL);
     this.recruitmentForm.get('img')?.setValue(this.dataURL);
   };
 
