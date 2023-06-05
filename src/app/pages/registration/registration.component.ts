@@ -62,17 +62,4 @@ export class RegistrationComponent implements OnInit {
 
     return messages;
   }
-
-
-  // public get email(): any {
-  //   return this.registrationForm.get('email');
-  // }
-  //
-  // public get password(): any {
-  //   return this.registrationForm.get('password');
-  // }
-  //
-  // public get repeat(): any {
-  //   return this.registrationForm.get('repeat');
-  // }
 }
