@@ -82,7 +82,7 @@ export class RecruitmentComponent implements OnInit {
   ];
 
   constructor(private _workersService: WorkersService, private _iconService: IconService,
-              private _formBuilder: FormBuilder) {
+              private _formBuilder: FormBuilder, private _renderer: Renderer2) {
     this._iconService.add('cloud', cloudIcon);
     this.workerData$.pipe(
       take(1)
@@ -105,10 +105,6 @@ export class RecruitmentComponent implements OnInit {
       }
       this.recruitmentForm$.next(this.recruitmentForm);
     });
-  }
-
-  constructor(private _workersService: WorkersService, private _iconService: IconService, private _renderer: Renderer2) {
-    this._iconService.add('cloud', cloudIcon);
   }
 
   public makeImage = (): void => {
