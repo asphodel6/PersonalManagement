@@ -31,7 +31,7 @@ export class RecruitmentComponent {
 
   public dataURL: string = '';
 
-  @ViewChild('img', { static: true }) public image!: ElementRef;
+  @ViewChild('img', { static: true }) public myImage!: ElementRef;
   @ViewChild('inputImg') public inputImage!: ElementRef;
 
   public workerData$: Observable<IWorker> = inject(workerData);
@@ -99,16 +99,20 @@ export class RecruitmentComponent {
   }
 
   public makeImage = (): void => {
-    const image: HTMLImageElement = this.image.nativeElement;
-    this._renderer.setAttribute(image, 'src', URL.createObjectURL(this.inputImage.nativeElement.files[0]));
-
+    // const myImage: HTMLImageElement = this.myImage.nativeElement;
     const canvas: HTMLCanvasElement = this._renderer.createElement('canvas');
-    this._renderer.setAttribute(canvas, 'width', image.naturalWidth.toString());
-    this._renderer.setAttribute(canvas, 'height', image.naturalHeight.toString());
-    const ctx:CanvasRenderingContext2D = canvas.getContext('2d')!;
-    ctx.drawImage(image, 0, 0);
-    this.dataURL = canvas.toDataURL();
-    this.recruitmentForm.get('img')?.setValue(this.dataURL);
+    const image: HTMLImageElement = new Image();
+    this._renderer.setAttribute(image, 'src', URL.createObjectURL(this.inputImage.nativeElement.files[0]));
+    image.onload = ():void => {
+      this._renderer.setAttribute(canvas, 'width', image.naturalWidth.toString());
+      this._renderer.setAttribute(canvas, 'height', image.naturalHeight.toString());
+      const ctx:CanvasRenderingContext2D = canvas.getContext('2d')!;
+      ctx.drawImage(image, 0, 0);
+      this.dataURL = canvas.toDataURL();
+      this.recruitmentForm.get('img')?.setValue(this.dataURL);
+      console.log(this.recruitmentForm.get('img')?.value);
+    };
+    this.myImage.nativeElement.src = image.src;
   };
 
   public get isFormInvalid(): boolean {
