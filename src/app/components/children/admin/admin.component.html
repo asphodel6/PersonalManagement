@@ -1,0 +1,13 @@
+<div class="main">
+  <div class="example-container">
+    <div mode="side" opened class="sidenav">
+      <admin-sidebar></admin-sidebar>
+    </div>
+    <div class="content">
+      <div [@routeAnimations]="getRouteAnimationData()">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
+

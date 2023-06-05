@@ -1,0 +1,59 @@
+<div class="header">
+  <div class="container-top">
+    <div>
+      <mat-form-field appearance="outline" class="search">
+        <mat-label>Поиск</mat-label>
+        <input type="search" matInput [(ngModel)]="searchText" type="text">
+      </mat-form-field>
+    </div>
+    <div >
+      <mat-paginator class="paginator"
+                     [length]="length"
+                     [pageIndex]="pageIndex"
+                     [pageSize]="pageSize"
+                     [pageSizeOptions]="[10, 25, 50, 100]"
+                     (page)="pageEvent = getServerData($event)"
+                     aria-label="Select page"
+                     hidePageSize="true"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+  <div class="container-bottom">
+    <div class="sort-field" [ngClass]="{ 'active-sort': compareSortBy(1, true), 'active-sort-ml': compareSortBy(1, false) }" (click)="sortByName();">
+      <p class="field-text">Имя</p>
+      <mat-icon>sort</mat-icon>
+    </div>
+    <div class="sort-field" [ngClass]="{ 'active-sort': compareSortBy(2, true), 'active-sort-ml': compareSortBy(2, false)}" (click)="sortByPosition()">
+      <p class="field-text">Позиция</p>
+      <mat-icon>sort</mat-icon>
+    </div>
+    <div class="sort-field" [ngClass]="{ 'active-sort': compareSortBy(3, true), 'active-sort-ml': compareSortBy(3, false)}" (click)="sortByPlace()">
+      <p class="field-text">Офис</p>
+      <mat-icon>sort</mat-icon>
+    </div>
+    <div class="sort-field" [ngClass]="{ 'active-sort': compareSortBy(4, true), 'active-sort-ml': compareSortBy(4, false)}" (click)="sortBySalary()">
+      <p class="field-text">Ставка</p>
+      <mat-icon>sort</mat-icon>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div *ngFor="let worker of visibleWorkers$ | async | appFilter: searchText | appSort: sortBy let x = index" class="user-container" [ngClass]="{
+    even: (x % 2 !== 0)
+  }" >
+    <div class="user-field user-name">
+      {{worker.name}}
+    </div>
+    <div class="user-field">
+      {{worker.profession}}
+    </div>
+    <div class="user-field">
+      {{worker.place}}
+    </div>
+    <div class="user-field">
+      {{worker.currentSalary | currency:'₽'}}
+    </div>
+    <app-green-button label="Подробнее" (byClick)="more(worker.key)" />
+  </div>
+</div>

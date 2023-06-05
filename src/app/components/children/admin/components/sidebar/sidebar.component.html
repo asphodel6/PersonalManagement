@@ -1,0 +1,23 @@
+<div class="user-info">
+  <img src="../../../../../../assets/Joe-Hughes.jpg">
+  <div class="user-info-text">
+    <p class="status">{{ "administator"  }}</p>
+  </div>
+</div>
+
+<div class="sidebar-buttons">
+  <div class="sidebar-startbox">
+    <admin-nav-button text="workers" path="/admin/workers">
+      <mat-icon>people</mat-icon>
+    </admin-nav-button>
+
+    <admin-nav-button text="Recruitments" path="/admin/recruitment">
+      <mat-icon>person_add</mat-icon>
+    </admin-nav-button>
+    <div class="divider"></div>
+    <admin-nav-button text="Log out" (click)="logout()">
+      <mat-icon>input</mat-icon>
+    </admin-nav-button>
+  </div>
+</div>
+

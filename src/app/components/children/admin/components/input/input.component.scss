@@ -1,0 +1,74 @@
+@import './src/styles';
+.cardOfInput {
+  margin-top: 19px;
+  width: 340px;
+}
+
+.label-input {
+  margin-bottom: 5px;
+  margin-right: 15px;
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: #F1F1F1;
+
+}
+
+.labelWithValid {
+  display: flex;
+  align-items: center;
+}
+
+.invalid {
+  color: red;
+}
+
+.invalidMessenger {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.input {
+  font-size: 20px;
+  height: 50px;
+  width: 100%;
+  padding: 0 15px;
+  background: #EEEEEE;
+  border: none;
+  border-radius: 8px;;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.select {
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  height: 50px;
+  width: 100%;
+  background: #EEEEEE;
+  border: none;
+  border-radius: 8px;
+
+  font-family: 'Poppins', sans-serif;
+
+  font-size: 22px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.option {
+  height: 50px;
+  width: 100%;
+  padding: 0 15px;
+  background: #EEEEEE;
+  border: none;
+  border-radius: 8px;;
+}

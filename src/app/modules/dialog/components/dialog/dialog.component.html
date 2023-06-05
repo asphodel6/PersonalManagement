@@ -1,0 +1,10 @@
+<div class="content">
+  <h1 mat-dialog-title class="label">{{ data.dialogHeader }}</h1>
+  <div mat-dialog-content class="text">
+    {{ data.dialogContent }}
+  </div>
+  <div mat-dialog-actions class="buttons">
+    <button  mat-button (click)="onNoClick()"><span class="no-btn">{{ data.cancelButton.title }}</span></button>
+    <button mat-button (click)="onYesClick()"><span class="yes-btn">{{ data.confirmButton.title }}</span></button>
+  </div>
+</div>

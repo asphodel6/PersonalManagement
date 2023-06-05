@@ -1,0 +1,32 @@
+$color-primary: #1C1C1E;
+$color-secondary: #323235;
+$color-text: #FFFFFF;
+$color-black: #000000;
+$color-green: #58B98A;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+html, body {
+  height: 100%;
+} 
+.snack-bar {
+  --mdc-snackbar-container-color: #1C1C1E;
+  --mat-mdc-snack-bar-button-color: #58B98A;
+}
+app-root {
+  display: block;
+  height: 100%;
+}
+app-admin {
+  display: block;
+
+  height: 100%;
+}
+.mat-typography {
+  min-height: 100vh;
+}

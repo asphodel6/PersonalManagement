@@ -1,0 +1,78 @@
+@import '../../../styles';
+
+.container {
+  background-color: $color-primary;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  min-height: 100%;
+}
+
+.title {
+  color: $color-text;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 75px;
+  margin-top: 72px;
+}
+
+.text {
+  color: $color-text;
+  font-size: 20px;
+}
+
+.content {
+  padding: 0 100px;
+  width: 100%;
+  max-width: 800px;
+  height: 100%;
+}
+
+.email-description {
+  margin-top: 140px;
+}
+
+.inputForm {
+  background-color: #3B3B41;
+  height: 60px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: $color-text;
+  width: 100%;
+}
+
+.additional {
+  display: grid;
+  grid-template-areas: 'a b';
+  justify-content: space-between;
+  padding-right: 74px;
+}
+
+.danger {
+  color: red;
+}
+
+button {
+  background-color: $color-green;
+  color: $color-black;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 45px;
+  margin-top: 60px;
+  height: 80px;
+}
+
+.registration {
+  margin-top: 82px;
+  margin-bottom: 70px;
+}
+
+span {
+  font-weight: 600;
+  border-bottom: 2px solid $color-green;
+}
+
+.login {
+  margin-top: 50px;
+}

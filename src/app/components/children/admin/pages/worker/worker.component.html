@@ -1,0 +1,55 @@
+<div class="container" *ngLet="workerData$ | async as workerData">
+  <div class="highlightBlock">
+    <img src="{{ workerData?.img }}" alt="" class="img">
+    <div class="description">
+      <span class="highlight">{{ workerData?.name }}</span>
+      <span class="highlight">{{ workerData?.profession }}</span>
+      <span class="highlight">возраст: {{ workerData?.age }}</span>
+      <span class="highlight">{{ workerData?.currentSalary }} RUB</span>
+    </div>
+    <div class="buttons-block">
+      <app-green-button width="125px" label="Редактировать" (byClick)="updateWorker(workerData.key)" />
+      <app-green-button width="125px" label="Удалить" (byClick)="openDialog(workerData.key)" />
+    </div>
+  </div>
+
+  <div class="userInformationBlock">
+    <h3 class="h3">Сведения о пользователе</h3>
+
+    <div class="graph" *ngIf="workerData">
+      <worker-salary-graph [myData]="workerData.salaryStatistic"/>
+    </div>
+
+    <div class="additionalInformation">
+      <div class="card">
+        <div class="label">Электронная почта</div>
+        <div class="value">{{ workerData?.email }}</div>
+      </div>
+
+      <div class="card">
+        <div class="label">Телефон</div>
+        <div class="value">{{ workerData?.phone }}</div>
+      </div>
+
+      <div class="card">
+        <div class="label">Дата рождения</div>
+        <div class="value">{{ workerData?.dateOfBirth }}</div>
+      </div>
+
+      <div class="card">
+        <div class="label">Дата устройства</div>
+        <div class="value">{{ workerData?.deviceDate }}</div>
+      </div>
+
+      <div class="card">
+        <div class="label">Обучение</div>
+        <div class="value">{{ workerData?.education }}</div>
+      </div>
+
+      <div class="card">
+        <div class="label">Название Уч. заведения</div>
+        <div class="value">{{ workerData?.institution }}</div>
+      </div>
+    </div>
+  </div>
+</div>

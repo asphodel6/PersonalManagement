@@ -1,0 +1,21 @@
+@import '../../../../styles';
+
+.example-container {
+  width: 100%;
+  height: 100%;
+  background-color: $color-secondary;
+  display: flex;
+}
+.sidenav {
+  width: 232px;
+  background-color: $color-primary;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+}
+
+.main {
+  height: 100%;
+}
