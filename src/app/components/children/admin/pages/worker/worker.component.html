@@ -1,6 +1,6 @@
 <div class="container" *ngLet="workerData$ | async as workerData">
   <div class="highlightBlock">
-    <img src="/" alt="" class="img">
+    <img src="{{ workerData?.img }}" alt="" class="img">
     <div class="description">
       <span class="highlight">{{ workerData?.name }}</span>
       <span class="highlight">{{ workerData?.profession }}</span>

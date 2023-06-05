@@ -99,7 +99,6 @@ export class RecruitmentComponent {
   }
 
   public makeImage = (): void => {
-    // const myImage: HTMLImageElement = this.myImage.nativeElement;
     const canvas: HTMLCanvasElement = this._renderer.createElement('canvas');
     const image: HTMLImageElement = new Image();
     this._renderer.setAttribute(image, 'src', URL.createObjectURL(this.inputImage.nativeElement.files[0]));
@@ -110,7 +109,6 @@ export class RecruitmentComponent {
       ctx.drawImage(image, 0, 0);
       this.dataURL = canvas.toDataURL();
       this.recruitmentForm.get('img')?.setValue(this.dataURL);
-      console.log(this.recruitmentForm.get('img')?.value);
     };
     this.myImage.nativeElement.src = image.src;
   };
@@ -125,7 +123,6 @@ export class RecruitmentComponent {
   }
 
   public submitRecruitment(): void {
-    console.log(this.dataURL);
     this._workersService.setWorker(this.recruitmentForm.value, this.worker);
     this.recruitmentForm.reset();
   }
