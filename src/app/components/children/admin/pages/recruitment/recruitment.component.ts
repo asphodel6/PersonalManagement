@@ -29,7 +29,9 @@ export type Card = {
 })
 export class RecruitmentComponent {
 
-  @ViewChild('img') public image!: ElementRef;
+  public dataURL: string = '';
+
+  @ViewChild('img', { static: true }) public image!: ElementRef;
   @ViewChild('inputImg') public inputImage!: ElementRef;
 
   public workerData$: Observable<IWorker> = inject(workerData);
@@ -40,7 +42,7 @@ export class RecruitmentComponent {
 
 
   public recruitmentForm: FormGroup = new FormGroup({
-    img: new FormControl(),
+    img: new FormControl(''),
     name: new FormControl('', [Validators.required, Validators.pattern(this.patternForValidationName), Validators.maxLength(15)]),
     surname: new FormControl('', [Validators.required, Validators.pattern(this.patternForValidationName), Validators.maxLength(20)]),
     patronymic: new FormControl('', [Validators.pattern(this.patternForValidationName), Validators.maxLength(15)]),
@@ -78,7 +80,7 @@ export class RecruitmentComponent {
       if (worker !== null) {
         this.worker = worker;
         this.recruitmentForm = this._formBuilder.group({
-          img: [worker.img],
+          dataURL: [worker.img],
           name: [worker.name.split(' ')[0]],
           surname: [worker.name.split(' ')[1]],
           patronymic: [worker.name.split(' ')[2]],
@@ -97,7 +99,15 @@ export class RecruitmentComponent {
   }
 
   public makeImage = (): void => {
-    this._renderer.setAttribute(this.image.nativeElement, 'src', URL.createObjectURL(this.inputImage.nativeElement.files[0]));
+    const image: HTMLImageElement = this.image.nativeElement;
+    this._renderer.setAttribute(image, 'src', URL.createObjectURL(this.inputImage.nativeElement.files[0]));
+
+    const canvas: HTMLCanvasElement = this._renderer.createElement('canvas');
+    this._renderer.setAttribute(canvas, 'width', image.naturalWidth.toString());
+    this._renderer.setAttribute(canvas, 'height', image.naturalHeight.toString());
+    const ctx:CanvasRenderingContext2D = canvas.getContext('2d')!;
+    ctx.drawImage(image, 0, 0);
+    this.dataURL = canvas.toDataURL();
   };
 
   public get isFormInvalid(): boolean {
