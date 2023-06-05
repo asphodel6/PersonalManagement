@@ -38,7 +38,6 @@ export class WorkersService  {
     worker.education = form.education;
     worker.profession = form.position;
     worker.institution = form.completedEducationalInstitution;
-    worker.eventHistory = [];
     worker.age = this.calculateAge(workerDateOfBirth, workerDeviceDate);
     worker.place = form.place;
     this.pushWorker(worker);

@@ -13,7 +13,6 @@ export interface IWorker {
   key: string
 
   salaryStatistic: SalaryAtMoment[] ;
-  eventHistory: string[],
 }
 
 export type SalaryAtMoment = {
