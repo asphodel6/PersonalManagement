@@ -21,7 +21,6 @@ import { WorkersService } from './services/workers.service';
 import { GraphComponent } from './components/graph/graph.component';
 import { NgChartsModule } from 'ng2-charts';
 import { InputComponent } from './components/input/input.component';
-import { IconService } from './services/IconService';
 import { GlobalErrorHandlerService } from '../../../services/global-error-handler.service';
 import { AlertService } from '../../../services/alert.service';
 import { WorkerService } from './services/worker.service';
@@ -65,7 +64,7 @@ import { LetDirective } from './directives/let.directive';
     DialogModule,
     MatSelectModule
   ],
-  providers: [WorkersService, IconService, AlertService, WorkerService,
+  providers: [WorkersService, AlertService, WorkerService,
     { provide: ErrorHandler, useClass: GlobalErrorHandlerService }
   ]
 })
