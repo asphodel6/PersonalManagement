@@ -80,7 +80,7 @@ export class RecruitmentComponent {
       if (worker !== null) {
         this.worker = worker;
         this.recruitmentForm = this._formBuilder.group({
-          dataURL: [worker.img],
+          img: this.dataURL,
           name: [worker.name.split(' ')[0]],
           surname: [worker.name.split(' ')[1]],
           patronymic: [worker.name.split(' ')[2]],
