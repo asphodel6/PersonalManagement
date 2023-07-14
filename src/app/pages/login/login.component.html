@@ -10,7 +10,7 @@
           {{error}}
         </div>
       </div>
-      <div class="text">Пароль</div>
+      <div class="text password">Пароль</div>
       <div><input class="inputForm" type="password" formControlName="password"></div>
       <div *ngIf="validationElementMethod('password')" class="danger">
         <div class="invalidMessenger" *ngFor="let error of getErrorMessages(loginForm.get('password')!)">

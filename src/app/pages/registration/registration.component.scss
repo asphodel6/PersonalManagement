@@ -44,6 +44,7 @@
 
 .danger {
   color: red;
+  position: absolute;
 }
 
 button {
@@ -67,4 +68,8 @@ span {
 }
 .confirm {
   margin-top: 50px;
+}
+
+.margin {
+  margin-top: 20px;
 }

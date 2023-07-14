@@ -10,14 +10,14 @@
           {{error}}
         </div>
       </div>
-      <div class="text">Пароль</div>
+      <div class="text margin">Пароль</div>
       <div><input class="registrationForm" type="password" formControlName="password"></div>
       <div *ngIf="validationElementMethod('password')" class="danger">
         <div class="invalidMessenger" *ngFor="let error of getErrorMessages(registrationForm.get('password')!)">
           {{error}}
         </div>
       </div>
-      <div class="text">Повторите пароль</div>
+      <div class="text margin">Повторите пароль</div>
       <div><input class="registrationForm" type="password" formControlName="repeat"></div>
       <div *ngIf="registrationForm.get('repeat')?.touched" class="danger">
         <div *ngIf="repeatPassportValid()">Пароли должны совпадать</div>
